@@ -1,0 +1,12 @@
+package arreglos;
+import java.util.ArrayList;
+
+import clases.Producto;
+
+public class ArregloProductos {
+	ArrayList<Producto> productos;
+	
+	public ArregloProductos() {
+		productos = ArrayList<Producto>();
+	}
+}

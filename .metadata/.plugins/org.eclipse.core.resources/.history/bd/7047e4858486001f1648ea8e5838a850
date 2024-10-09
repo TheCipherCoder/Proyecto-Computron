@@ -1,0 +1,6 @@
+package arreglos;
+import clases.Producto;
+
+public class ArregloProductos {
+	
+}
