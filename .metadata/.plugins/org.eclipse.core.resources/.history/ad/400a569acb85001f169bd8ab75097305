@@ -1,0 +1,7 @@
+package clases;
+
+public class Venta {
+	private int codigoVenta;
+	private int codigoCliente;
+	private int codigoProducto;
+}

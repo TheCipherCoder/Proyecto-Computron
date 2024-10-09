@@ -1,0 +1,13 @@
+package clases;
+
+public class Cliente {
+	private int codigoCliente;
+	private String nombre;
+	private String apellidos;
+	private String direccion;
+	private String telefono;
+	private String dni;
+	
+	public Cliente() {
+	}
+}

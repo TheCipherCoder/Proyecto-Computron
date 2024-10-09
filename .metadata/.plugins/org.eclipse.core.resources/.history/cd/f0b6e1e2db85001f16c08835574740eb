@@ -1,0 +1,99 @@
+package vistas.Clientes;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
+public class Consulta extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblModificarCliente;
+	private JLabel lblNewLabel_1;
+	private JTextField txtCod;
+	private JButton btnModificar;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	private JTable tablaClientes;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Consulta frame = new Consulta();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Consulta() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 610, 400);
+        setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblModificarCliente = new JLabel("Consulta");
+		lblModificarCliente.setFont(new Font("Yu Gothic UI", Font.BOLD, 18));
+		lblModificarCliente.setBounds(220, 28, 182, 20);
+		contentPane.add(lblModificarCliente);
+		
+		lblNewLabel_1 = new JLabel("CodCliente");
+		lblNewLabel_1.setBounds(10, 69, 93, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		txtCod = new JTextField();
+		txtCod.setEditable(false);
+		txtCod.setBounds(113, 66, 86, 20);
+		contentPane.add(txtCod);
+		txtCod.setColumns(10);
+		
+		btnModificar = new JButton("Consultar");
+		btnModificar.setBounds(100, 301, 170, 52);
+		contentPane.add(btnModificar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 150, 566, 50);
+		contentPane.add(scrollPane);
+		
+		tablaClientes = new JTable();
+		tablaClientes.setBackground(new Color(255, 255, 255));
+		tablaClientes.setFont(new Font("Open Sans", Font.BOLD, 14));
+		tablaClientes.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+			},
+			new String[] {
+				"C\u00F3digo", "Nombre", "Apellido", "Dni","Direccion","Teléfono"
+			}
+		));
+		
+		
+		tablaClientes.getColumnModel().getColumn(0).setMinWidth(100);
+		tablaClientes.getColumnModel().getColumn(0).setMaxWidth(100);
+		scrollPane.setViewportView(tablaClientes);
+	}
+}

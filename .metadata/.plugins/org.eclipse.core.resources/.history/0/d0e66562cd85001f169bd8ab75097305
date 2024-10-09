@@ -1,0 +1,80 @@
+package vistas;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+
+public class MenuPrincipal extends JFrame implements ActionListener {
+
+    private JPanel contentPane;
+    private JMenuBar menuBar;
+    private JMenuItem mntmNewMenuItem_1;
+    private JMenuItem mntmNewMenuItem_2;
+    private JMenuItem mntmNewMenuItem_3;
+    private JMenu mnNewMenu;
+    private JMenuItem mntmNewMenuItem;
+    private JMenuItem mntmNewMenuItem_4;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuPrincipal frame = new MenuPrincipal();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public MenuPrincipal() {
+        setTitle("Mas frio que felpudini - Menú Principal");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 982, 626);
+        
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        
+        mnNewMenu = new JMenu("Mantenimiento");
+        menuBar.add(mnNewMenu);
+        
+        mntmNewMenuItem = new JMenuItem("Cliente");
+        mnNewMenu.add(mntmNewMenuItem);
+        
+        mntmNewMenuItem_4 = new JMenuItem("Productos");
+        mnNewMenu.add(mntmNewMenuItem_4);
+        
+        mntmNewMenuItem_1 = new JMenuItem("Ventas");
+        menuBar.add(mntmNewMenuItem_1);
+        
+        mntmNewMenuItem_2 = new JMenuItem("Almacen");
+        menuBar.add(mntmNewMenuItem_2);
+        
+        mntmNewMenuItem_3 = new JMenuItem("Reportes");
+        menuBar.add(mntmNewMenuItem_3);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+    }
+
+    // Manejo de los eventos para los botones
+    public void actionPerformed(ActionEvent e) {
+    }
+}

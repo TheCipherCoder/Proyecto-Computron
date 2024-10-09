@@ -1,0 +1,14 @@
+package clases;
+
+public class Producto {
+	private int codigoProducto=2001;
+	private String nombre;
+	private double precio;
+	private int StockActual;
+	private int stockMinimo;
+	private int stockMaximo;
+	
+	public Producto() {
+		codigoProducto++;
+	}
+}

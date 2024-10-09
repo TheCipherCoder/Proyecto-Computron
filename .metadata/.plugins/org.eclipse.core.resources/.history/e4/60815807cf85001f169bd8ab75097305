@@ -1,0 +1,102 @@
+package vistas;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+public class MenuPrincipal extends JFrame implements ActionListener {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuPrincipal frame = new MenuPrincipal();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public MenuPrincipal() {
+        setTitle("Mas frio que felpudini - Menú Principal");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 600, 400);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // Crear JMenuBar
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        // Crear JMenu Mantenimiento (sin eventos)
+        JMenu mnMantenimiento = new JMenu("Mantenimiento");
+        menuBar.add(mnMantenimiento);
+
+        // Subopciones del menú Mantenimiento
+        JMenuItem miClientes = new JMenuItem("Clientes");
+        mnMantenimiento.add(miClientes);
+
+        JMenuItem miProductos = new JMenuItem("Productos");
+        mnMantenimiento.add(miProductos);
+
+        // Otras opciones del menú principal con eventos
+        JMenu mnVentas = new JMenu("Ventas");
+        menuBar.add(mnVentas);
+        mnVentas.addActionListener(this);  // Evento al hacer clic en Ventas
+
+        JMenu mnAlmacen = new JMenu("Almacén");
+        menuBar.add(mnAlmacen);
+        mnAlmacen.addActionListener(this);  // Evento al hacer clic en Almacén
+
+        JMenu mnReportes = new JMenu("Reportes");
+        menuBar.add(mnReportes);
+        mnReportes.addActionListener(this);  // Evento al hacer clic en Reportes
+
+        // Agregar imagen al centro
+        JLabel lblImagen = new JLabel("");
+        lblImagen.setBounds(150, 50, 300, 300);  // Tamaño y posición de la imagen
+        contentPane.add(lblImagen);
+
+        // Cargar imagen de Felpudini
+        ImageIcon icon = new ImageIcon("ruta/a/tu/imagen/felpudini.jpg"); // Reemplazar con la ruta de tu imagen
+        Image image = icon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+        lblImagen.setIcon(new ImageIcon(image));
+    }
+
+    // Manejo de los eventos de los menús
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JMenu source = (JMenu) e.getSource();
+
+        if (source.getText().equals("Ventas")) {
+            JOptionPane.showMessageDialog(this, "Opción Ventas seleccionada.");
+        } else if (source.getText().equals("Almacén")) {
+            JOptionPane.showMessageDialog(this, "Opción Almacén seleccionada.");
+        } else if (source.getText().equals("Reportes")) {
+            JOptionPane.showMessageDialog(this, "Opción Reportes seleccionada.");
+        }
+    }
+}
+

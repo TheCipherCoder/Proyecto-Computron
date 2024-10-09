@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.awt.Font"/>
+    <fullyQualifiedTypeName name="vistas.Mantenimiento"/>
+    <fullyQualifiedTypeName name="vistas.Clientes.Consulta"/>
+    <fullyQualifiedTypeName name="vistas.Clientes.Modificar"/>
+    <fullyQualifiedTypeName name="vistas.MenuPrincipal"/>
+    <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+    <fullyQualifiedTypeName name="vistas.MantenimientoProducto"/>
+</qualifiedTypeNameHistroy>

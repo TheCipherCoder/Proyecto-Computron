@@ -1,0 +1,15 @@
+package clases;
+
+public class Cliente {
+	private int codigoCliente = 1001;
+	private String nombre;
+	private String apellidos;
+	private String direccion;
+	private String telefono;
+	private String dni;
+	
+	public Cliente() {
+		//Autogenerativo
+		codigoCliente++;
+	}
+}

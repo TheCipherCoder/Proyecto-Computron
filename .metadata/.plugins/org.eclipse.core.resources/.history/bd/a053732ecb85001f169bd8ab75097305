@@ -1,0 +1,8 @@
+package clases;
+
+public class Producto {
+	private int codigoProducto;
+	private String nombre;
+	private double precio;
+	private int StockActual;
+}

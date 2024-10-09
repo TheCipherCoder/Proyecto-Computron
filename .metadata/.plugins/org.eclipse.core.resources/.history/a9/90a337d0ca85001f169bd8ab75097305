@@ -1,0 +1,7 @@
+package clases;
+
+public class Cliente {
+	private int codigoCliente;
+	private String nombre;
+	private String apellidos;
+}

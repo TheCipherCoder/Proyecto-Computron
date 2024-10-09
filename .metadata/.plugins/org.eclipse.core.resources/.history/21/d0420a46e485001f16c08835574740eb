@@ -1,0 +1,91 @@
+package vistas;
+
+import java.awt.EventQueue;
+import vistas.Clientes.*;
+
+
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Mantenimiento extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblClientes;
+	private JLabel lblNewLabel_2;
+	private JButton btnClientes;
+	private JButton btnProductos;
+	private JButton btnClientes12;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Mantenimiento frame = new Mantenimiento();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Mantenimiento() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("MANTENIMIENTO");
+		lblNewLabel.setBounds(148, 11, 164, 14);
+		contentPane.add(lblNewLabel);
+		
+		lblClientes = new JLabel("Clientes");
+		lblClientes.setBounds(99, 195, 164, 14);
+		contentPane.add(lblClientes);
+		
+		lblNewLabel_2 = new JLabel("Productos");
+		lblNewLabel_2.setBounds(270, 195, 164, 14);
+		contentPane.add(lblNewLabel_2);
+			
+		btnProductos = new JButton("");
+		btnProductos.setBounds(251, 57, 122, 114);
+		contentPane.add(btnProductos);
+		
+		btnClientes12 = new JButton("");
+		btnClientes12.setBounds(48, 57, 122, 114);
+		contentPane.add(btnClientes12);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnClientes) {
+			actionPerformedBtnClientes(e);
+		}
+	}
+	protected void actionPerformedBtnClientes(ActionEvent e) {
+		
+		Consulta c = new Consulta(this);
+		c.setVisible(true);
+		this.setVisible(false);
+		
+		
+		
+
+	}
+}

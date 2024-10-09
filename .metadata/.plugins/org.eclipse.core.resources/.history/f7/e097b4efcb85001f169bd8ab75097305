@@ -1,0 +1,14 @@
+package clases;
+
+public class Venta {
+	private int codigoVenta = 3001;
+	private int codigoCliente;
+	private int codigoProducto;
+	private int cantidad;
+	private double precio;
+	private String fecha;
+	
+	public Venta() {
+		codigoVenta++;
+	}
+}

@@ -1,0 +1,59 @@
+package vistas;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class MenuPrincipal extends JFrame implements ActionListener {
+
+    private JPanel contentPane;
+    private JMenuBar menuBar;
+    private JMenuItem mntmNewMenuItem;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    MenuPrincipal frame = new MenuPrincipal();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public MenuPrincipal() {
+        setTitle("Mas frio que felpudini - Menú Principal");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 982, 626);
+        
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        
+        mntmNewMenuItem = new JMenuItem("Mantenimiento");
+        menuBar.add(mntmNewMenuItem);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+    }
+
+    // Manejo de los eventos para los botones
+    public void actionPerformed(ActionEvent e) {
+    }
+}
