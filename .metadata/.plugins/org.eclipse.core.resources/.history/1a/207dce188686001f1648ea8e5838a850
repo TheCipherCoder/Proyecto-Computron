@@ -15,7 +15,7 @@ public class ArregloProductos {
 		return productos.size();
 	}
 	
-	public int largo2() {
-		return productos.size();
+	public Producto obtener(int i) {
+		return productos[i]
 	}
 }
