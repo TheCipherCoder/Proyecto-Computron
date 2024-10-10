@@ -145,7 +145,6 @@ public class Ventas extends JFrame implements ActionListener {
 		contentPane.add(lblVentas);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setForeground(new Color(255, 255, 255));
 		btnBuscar.setBackground(new Color(0, 128, 255));
 		btnBuscar.setBounds(364, 47, 138, 33);
 		contentPane.add(btnBuscar);
