@@ -19,6 +19,7 @@ import vistas.Ventas;
 import vistas.Almacen;
 import vistas.Reportes;
 import vistas.Mantenimiento;
+import java.awt.Color;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
 
@@ -56,6 +57,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         setBounds(100, 100, 1008, 592);
         setLocationRelativeTo(null);
         contentPane = new JPanel();
+        contentPane.setBackground(new Color(0, 59, 93));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
