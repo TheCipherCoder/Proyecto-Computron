@@ -39,7 +39,7 @@ public class Reportes extends JFrame implements ActionListener {
      * Create the frame.
      */
     public Reportes() {
-        setTitle("Reportes");
+        setTitle("Mas frio que felpudini - Reportes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 833, 529);
         setLocationRelativeTo(null);

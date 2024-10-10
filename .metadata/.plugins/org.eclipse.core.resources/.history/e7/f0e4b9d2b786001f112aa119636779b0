@@ -239,17 +239,13 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	
 	/* Mantenimiento Clientes */
 	protected void actionPerformedMiClientes(ActionEvent e) {
-		MantenimientoCliente mc = new MantenimientoCliente();
-		mc.setVisible(true);
-		this.setVisible(false);
+		
 	}
 	
 	
 	/*Mantenimiento Productos*/
 	protected void actionPerformedMiProductos(ActionEvent e) {
-		MantenimientoProducto mp = new MantenimientoProducto();
-		mp.setVisible(true);
-		this.setVisible(false);
+		
 	}
 	
 	/* Ventas */
