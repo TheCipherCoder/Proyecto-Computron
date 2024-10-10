@@ -152,7 +152,7 @@ public class Almacen extends JFrame implements ActionListener {
 		contentPane.add(lblAlmacen);
 		
 		DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-		headerRenderer.setBackground(new Color(51, 255, 0));
+		headerRenderer.setBackground(new Color(0, 128, 255));
 		headerRenderer.setFont(new Font("Open Sans", Font.BOLD, 14)); 
 		headerRenderer.setForeground(new Color(255, 255, 255));
 		headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
