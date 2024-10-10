@@ -3,7 +3,6 @@ package vistas;
 import java.awt.EventQueue;
 
 
-
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,6 +18,7 @@ import java.awt.event.ActionEvent;
 import vistas.Ventas;
 import vistas.Almacen;
 import vistas.Reportes;
+import vistas.Mantenimiento;
 import java.awt.Color;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
@@ -84,7 +84,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         mnVentas.addActionListener(this);
         menuBar.add(mnVentas);
         
-        mntmNewMenuItem = new JMenuItem("Registro de ventas");
+        mntmNewMenuItem = new JMenuItem("Nueva venta");
         mntmNewMenuItem.addActionListener(this);
         mnVentas.add(mntmNewMenuItem);
 
@@ -127,6 +127,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		
 		
+		
+		
+		
 	}
 	
 	
@@ -135,8 +138,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		
 		
 	}
-	
-	
 	
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
 		Ventas v = new Ventas(this);
