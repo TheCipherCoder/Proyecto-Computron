@@ -25,13 +25,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     private JMenu mnVentas;
-    private JMenuItem mntmClientes;
-    private JMenuItem mntmProductos;
-    private JMenuItem mntmAlmacen;
-    private JMenuItem mntmReportes;
-    private JMenuItem mntmRegistroVentas;
-    private JMenu mnArchivo;
-    private JMenuItem mntmSalir;
+    private JMenuItem miClientes;
+    private JMenuItem miProductos;
+    private JMenuItem mntmNewMenuItem_1;
+    private JMenuItem mntmNewMenuItem_2;
+    private JMenuItem mntmNewMenuItem;
 
     /**
      * Launch the application.
@@ -67,70 +65,60 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         // Crear JMenuBar
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        
-        mnArchivo = new JMenu("Archivo");
-        menuBar.add(mnArchivo);
-        
-        mntmSalir = new JMenuItem("Salir");
-        mntmSalir.addActionListener(this);
-        mnArchivo.add(mntmSalir);
 
         // Crear JMenu Mantenimiento
         JMenu mnMantenimiento = new JMenu("Mantenimiento");
         menuBar.add(mnMantenimiento);
 
         // Subopciones del menú Mantenimiento
-        mntmClientes = new JMenuItem("Clientes");
-        mntmClientes.addActionListener(this);
-        mnMantenimiento.add(mntmClientes);
+        miClientes = new JMenuItem("Clientes");
+        miClientes.addActionListener(this);
+        mnMantenimiento.add(miClientes);
 
-        mntmProductos = new JMenuItem("Productos");
-        mntmProductos.addActionListener(this);
-        mnMantenimiento.add(mntmProductos);
+        miProductos = new JMenuItem("Productos");
+        miProductos.addActionListener(this);
+        mnMantenimiento.add(miProductos);
 
         // Otras opciones del menú principal
         mnVentas = new JMenu("Ventas");
         mnVentas.addActionListener(this);
         menuBar.add(mnVentas);
         
-        mntmRegistroVentas = new JMenuItem("Registro de ventas");
-        mntmRegistroVentas.addActionListener(this);
-        mnVentas.add(mntmRegistroVentas);
+        mntmNewMenuItem = new JMenuItem("Registro de ventas");
+        mntmNewMenuItem.addActionListener(this);
+        mnVentas.add(mntmNewMenuItem);
 
         JMenu mnAlmacen = new JMenu("Almacén");
         menuBar.add(mnAlmacen);
         
-        mntmAlmacen = new JMenuItem("Ir a Almacen");
-        mntmAlmacen.addActionListener(this);
-        mnAlmacen.add(mntmAlmacen);
+        mntmNewMenuItem_1 = new JMenuItem("Ir a Almacen");
+        mntmNewMenuItem_1.addActionListener(this);
+        mnAlmacen.add(mntmNewMenuItem_1);
 
         JMenu mnReportes = new JMenu("Reportes");
         menuBar.add(mnReportes);
         
-        mntmReportes = new JMenuItem("Ir reportes");
-        mntmReportes.addActionListener(this);
-        mnReportes.add(mntmReportes);
+        mntmNewMenuItem_2 = new JMenuItem("Ir reportes");
+        mntmNewMenuItem_2.addActionListener(this);
+        mnReportes.add(mntmNewMenuItem_2);
 
         // Cargar imagen de Felpudini
         ImageIcon icon = new ImageIcon("ruta/a/tu/imagen/felpudini.jpg");
     }
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == mntmSalir) {
-			actionPerformedMntmSalir(e);
-		}
-		if (e.getSource() == mntmRegistroVentas) {
+		if (e.getSource() == mntmNewMenuItem) {
 			actionPerformedMntmNewMenuItem(e);
 		}
-		if (e.getSource() == mntmReportes) {
+		if (e.getSource() == mntmNewMenuItem_2) {
 			actionPerformedMntmNewMenuItem_2(e);
 		}
-		if (e.getSource() == mntmAlmacen) {
+		if (e.getSource() == mntmNewMenuItem_1) {
 			actionPerformedMntmNewMenuItem_1(e);
 		}
-		if (e.getSource() == mntmProductos) {
+		if (e.getSource() == miProductos) {
 			actionPerformedMiProductos(e);
 		}
-		if (e.getSource() == mntmClientes) {
+		if (e.getSource() == miClientes) {
 			actionPerformedMiClientes(e);
 		}
 	}
@@ -138,38 +126,35 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	/* Mantenimiento Clientes */
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		
+		
 	}
 	
 	
 	/*Mantenimiento Productos*/
 	protected void actionPerformedMiProductos(ActionEvent e) {
 		
+		
 	}
 	
-	/* Ventas */
+	
+	
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
 		Ventas v = new Ventas(this);
 		v.setVisible(true);
 		this.setVisible(false);
 	}
 	
-	/* Almacen */
 	protected void actionPerformedMntmNewMenuItem_1(ActionEvent e) {
+		
 		Almacen a = new Almacen();
 		a.setVisible(true);
 		this.setVisible(false);
 
 	}
 	
-	/* Reportes */
 	protected void actionPerformedMntmNewMenuItem_2(ActionEvent e) {
 		Reportes r = new Reportes();
 		r.setVisible(true);
 		this.setVisible(false);
-	}
-	
-	/* Salir */
-	protected void actionPerformedMntmSalir(ActionEvent e) {
-		System.exit(0);
 	}
 }

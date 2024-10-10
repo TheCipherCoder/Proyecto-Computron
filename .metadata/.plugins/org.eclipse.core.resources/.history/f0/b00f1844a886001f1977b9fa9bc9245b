@@ -138,11 +138,13 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	/* Mantenimiento Clientes */
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		
+		
 	}
 	
 	
 	/*Mantenimiento Productos*/
 	protected void actionPerformedMiProductos(ActionEvent e) {
+		
 		
 	}
 	
@@ -153,15 +155,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		this.setVisible(false);
 	}
 	
-	/* Almacen */
 	protected void actionPerformedMntmNewMenuItem_1(ActionEvent e) {
+		
 		Almacen a = new Almacen();
 		a.setVisible(true);
 		this.setVisible(false);
 
 	}
 	
-	/* Reportes */
 	protected void actionPerformedMntmNewMenuItem_2(ActionEvent e) {
 		Reportes r = new Reportes();
 		r.setVisible(true);

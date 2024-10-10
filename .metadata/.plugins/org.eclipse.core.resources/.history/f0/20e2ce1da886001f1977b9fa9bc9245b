@@ -138,30 +138,32 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	/* Mantenimiento Clientes */
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		
+		
 	}
 	
 	
 	/*Mantenimiento Productos*/
 	protected void actionPerformedMiProductos(ActionEvent e) {
 		
+		
 	}
 	
-	/* Ventas */
+	
+	
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
 		Ventas v = new Ventas(this);
 		v.setVisible(true);
 		this.setVisible(false);
 	}
 	
-	/* Almacen */
 	protected void actionPerformedMntmNewMenuItem_1(ActionEvent e) {
+		
 		Almacen a = new Almacen();
 		a.setVisible(true);
 		this.setVisible(false);
 
 	}
 	
-	/* Reportes */
 	protected void actionPerformedMntmNewMenuItem_2(ActionEvent e) {
 		Reportes r = new Reportes();
 		r.setVisible(true);
@@ -170,6 +172,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	
 	/* Salir */
 	protected void actionPerformedMntmSalir(ActionEvent e) {
-		System.exit(0);
+		
 	}
 }

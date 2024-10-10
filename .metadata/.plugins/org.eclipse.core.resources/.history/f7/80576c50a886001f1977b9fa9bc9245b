@@ -138,6 +138,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	/* Mantenimiento Clientes */
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		
+		
 	}
 	
 	
