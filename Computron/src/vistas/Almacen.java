@@ -22,8 +22,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import vistas.MenuPrincipal;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Almacen extends JFrame {
+public class Almacen extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -33,8 +35,8 @@ public class Almacen extends JFrame {
 	private JTextField txtCantidad;
 	private JButton btnAgregar;
 	private JScrollPane scrollPane;
-	private JLabel lblTitulo;
-	private JTable tablaEstudiantes;
+	private JLabel lblAlmacen;
+	private JTable tblEstudiantes;
 
 
 	/**
@@ -60,51 +62,64 @@ public class Almacen extends JFrame {
 	public Almacen() {
 		
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-		
+		setTitle("Almacen");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\perez\\Downloads\\ventas.png"));
-		setBounds(100, 100, 610, 573);
+		setBounds(100, 100, 810, 610);
         setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 59, 93));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblCodigo = new JLabel("C\u00F3digo del producto:");
+		lblCodigo.setForeground(Color.WHITE);
 		lblCodigo.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblCodigo.setBounds(10, 70, 187, 33);
 		contentPane.add(lblCodigo);
 		
 		cboCodigo = new JComboBox();
-		cboCodigo.setBounds(167, 74, 409, 27);
+		cboCodigo.setBounds(167, 74, 446, 27);
 		contentPane.add(cboCodigo);
 		
 		lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setForeground(Color.WHITE);
 		lblCantidad.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblCantidad.setBounds(10, 114, 187, 33);
 		contentPane.add(lblCantidad);
 		
 		txtCantidad = new JTextField();
 		txtCantidad.setColumns(10);
-		txtCantidad.setBounds(167, 118, 409, 27);
+		txtCantidad.setBounds(167, 118, 446, 27);
 		contentPane.add(txtCantidad);
 		
-		btnAgregar = new JButton("Ingresar stock");
+		btnAgregar = new JButton("Ingresar");
+		btnAgregar.addActionListener(this);
 		btnAgregar.setForeground(new Color(255, 255, 255));
-		btnAgregar.setBackground(new Color(51, 255, 0));
+		btnAgregar.setBackground(new Color(0, 128, 255));
 		btnAgregar.setFont(new Font("Open Sans", Font.BOLD, 14));
-		btnAgregar.setBounds(10, 172, 566, 38);
+		btnAgregar.setBounds(680, 70, 104, 83);
 		contentPane.add(btnAgregar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 277, 566, 227);
+		scrollPane.setBounds(10, 185, 774, 375);
 		contentPane.add(scrollPane);
 		
-		tablaEstudiantes = new JTable();
-		tablaEstudiantes.setBackground(new Color(255, 255, 255));
-		tablaEstudiantes.setFont(new Font("Open Sans", Font.BOLD, 14));
-		tablaEstudiantes.setModel(new DefaultTableModel(
+		tblEstudiantes = new JTable();
+		tblEstudiantes.setBackground(new Color(255, 255, 255));
+		tblEstudiantes.setFont(new Font("Open Sans", Font.BOLD, 14));
+		tblEstudiantes.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
 				{null, null, null, null},
@@ -125,16 +140,16 @@ public class Almacen extends JFrame {
 				"C\u00F3digo", "Nombre", "Stock actual", "Stock m\u00E1ximo"
 			}
 		));
+		tblEstudiantes.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tblEstudiantes.getColumnModel().getColumn(0).setMinWidth(100);
+		tblEstudiantes.getColumnModel().getColumn(0).setMaxWidth(100);
+		scrollPane.setViewportView(tblEstudiantes);
 		
-		
-		tablaEstudiantes.getColumnModel().getColumn(0).setMinWidth(100);
-		tablaEstudiantes.getColumnModel().getColumn(0).setMaxWidth(100);
-		scrollPane.setViewportView(tablaEstudiantes);
-		
-		lblTitulo = new JLabel("Sistema de almac\u00E9n");
-		lblTitulo.setFont(new Font("Open Sans", Font.BOLD, 25));
-		lblTitulo.setBounds(158, 11, 284, 35);
-		contentPane.add(lblTitulo);
+		lblAlmacen = new JLabel("Sistema de almac\u00E9n");
+		lblAlmacen.setForeground(Color.WHITE);
+		lblAlmacen.setFont(new Font("Open Sans", Font.BOLD, 25));
+		lblAlmacen.setBounds(265, 11, 284, 35);
+		contentPane.add(lblAlmacen);
 		
 		DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
 		headerRenderer.setBackground(new Color(51, 255, 0));
@@ -142,8 +157,8 @@ public class Almacen extends JFrame {
 		headerRenderer.setForeground(new Color(255, 255, 255));
 		headerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 
-		for (int i = 0; i < tablaEstudiantes.getColumnModel().getColumnCount(); i++) {
-		    tablaEstudiantes.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+		for (int i = 0; i < tblEstudiantes.getColumnModel().getColumnCount(); i++) {
+		    tblEstudiantes.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
 		}
 		MenuPrincipal menuprincipal = new MenuPrincipal();
 		
@@ -156,4 +171,11 @@ public class Almacen extends JFrame {
 	}
 	
 	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAgregar) {
+			actionPerformedBtnAgregar(e);
+		}
+	}
+	protected void actionPerformedBtnAgregar(ActionEvent e) {
+	}
 }

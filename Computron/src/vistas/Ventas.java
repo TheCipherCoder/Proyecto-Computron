@@ -20,17 +20,16 @@ import java.awt.event.WindowEvent;
 import vistas.MenuPrincipal;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
 public class Ventas extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblApellido;
-	private JLabel lblNombre_1;
+	private JLabel lblNombre;
 	private JTextField txtNombre;
 	private JLabel lblProducto;
-	private JComboBox comboBox;
+	private JComboBox cboCodigo;
 	private JLabel lblCantidad;
 	private JTextField txtCantidad;
 	private JButton btnNewButton;
@@ -39,7 +38,6 @@ public class Ventas extends JFrame implements ActionListener {
 	private MenuPrincipal menuprincipal;
 	private JButton btnBuscar;
 	private JTextArea txtBoleta;
-	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -83,11 +81,11 @@ public class Ventas extends JFrame implements ActionListener {
 		lblApellido.setBounds(10, 89, 187, 33);
 		contentPane.add(lblApellido);
 		
-		lblNombre_1 = new JLabel("Nombres del cliente:");
-		lblNombre_1.setForeground(Color.WHITE);
-		lblNombre_1.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblNombre_1.setBounds(10, 47, 187, 33);
-		contentPane.add(lblNombre_1);
+		lblNombre = new JLabel("Nombres del cliente:");
+		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblNombre.setBounds(10, 47, 187, 33);
+		contentPane.add(lblNombre);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(167, 51, 169, 27);
@@ -107,9 +105,9 @@ public class Ventas extends JFrame implements ActionListener {
 		lblProducto.setBounds(10, 133, 187, 33);
 		contentPane.add(lblProducto);
 		
-		comboBox = new JComboBox();
-		comboBox.setBounds(167, 133, 335, 27);
-		contentPane.add(comboBox);
+		cboCodigo = new JComboBox();
+		cboCodigo.setBounds(167, 133, 335, 27);
+		contentPane.add(cboCodigo);
 		
 		lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setForeground(Color.WHITE);
@@ -125,7 +123,7 @@ public class Ventas extends JFrame implements ActionListener {
 		btnNewButton = new JButton("Generar boleta");
 		btnNewButton.addActionListener(this);
 		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(Color.GRAY);
+		btnNewButton.setBackground(new Color(0, 128, 255));
 		btnNewButton.setFont(new Font("Open Sans", Font.BOLD, 14));
 		btnNewButton.setBounds(607, 53, 157, 137);
 		contentPane.add(btnNewButton);
@@ -145,15 +143,9 @@ public class Ventas extends JFrame implements ActionListener {
 		contentPane.add(lblVentas);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setForeground(new Color(255, 255, 255));
 		btnBuscar.setBackground(new Color(0, 128, 255));
 		btnBuscar.setBounds(364, 47, 138, 33);
 		contentPane.add(btnBuscar);
-		
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Ventas.class.getResource("/imagenes/LogoCibertec.jpg")));
-		lblNewLabel.setBounds(222, 5, 781, 560);
-		contentPane.add(lblNewLabel);
 		
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
 		
