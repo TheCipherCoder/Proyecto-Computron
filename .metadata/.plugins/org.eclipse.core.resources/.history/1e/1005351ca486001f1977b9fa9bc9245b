@@ -2,7 +2,7 @@ package clases;
 
 public class Producto {
    
-    private int codigo;
+    private int codigoProducto;
     private String nombre;
     private double precio;
     private int stockActual;
@@ -17,8 +17,13 @@ public class Producto {
         this.stockMaximo = stockMaximo;
     }
 
-    public int getCodigo() {
-        return codigo;
+    private static int contadorCodigoProducto = 2001;
+    private int generarCodigoProducto() {
+        return contadorCodigoProducto++;
+    }
+
+    public int getCodigoProducto() {
+        return codigoProducto;
     }
 
     public String getNombre() {

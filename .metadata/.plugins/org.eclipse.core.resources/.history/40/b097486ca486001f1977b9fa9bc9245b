@@ -36,7 +36,7 @@ public class ArregloProductos {
 	//  Operaciones públicas complementarias
 	public int codigoCorrelativo() {
 		if (tamaño() == 0)
-			return 3001;
+			return 1001;
 		else
 			return obtener(tamaño()-1).getCodigo() + 1;		
 	}

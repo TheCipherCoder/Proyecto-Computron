@@ -17,7 +17,7 @@ public class Producto {
         this.stockMaximo = stockMaximo;
     }
 
-    public int getCodigo() {
+    public int getCodigoProducto() {
         return codigo;
     }
 

@@ -17,8 +17,8 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoCliente() {
+        return codigoCliente;
     }
 
     public String getNombres() {

@@ -2,7 +2,7 @@ package clases;
 
 public class Cliente {
 	
-    private int codigo;
+    private int codigoCliente;
     private String nombres;
     private String apellidos;
     private String direccion;
@@ -10,6 +10,7 @@ public class Cliente {
     private String dni;
 
     public Cliente(String nombres, String apellidos, String direccion, String telefono, String dni) {
+        this.codigoCliente = generarCodigoCliente(); 
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -17,8 +18,13 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public int getCodigo() {
-        return codigo;
+    private static int contadorCodigoCliente = 1001; 
+    private int generarCodigoCliente() {
+        return contadorCodigoCliente++;
+    }
+
+    public int getCodigoCliente() {
+        return codigoCliente;
     }
 
     public String getNombres() {

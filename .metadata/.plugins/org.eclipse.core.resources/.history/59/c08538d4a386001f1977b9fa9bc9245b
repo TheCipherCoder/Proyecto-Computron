@@ -17,7 +17,7 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public int getCodigo() {
+    public int getCodigoCliente() {
         return codigo;
     }
 
