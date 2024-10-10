@@ -10,4 +10,5 @@
     <fullyQualifiedTypeName name="vistas.MantenimientoProducto"/>
     <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="vistas.Ventas"/>
 </qualifiedTypeNameHistroy>

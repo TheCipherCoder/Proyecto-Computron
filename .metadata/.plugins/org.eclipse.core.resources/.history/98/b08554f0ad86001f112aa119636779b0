@@ -22,7 +22,6 @@ import vistas.Reportes;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import javax.swing.SwingConstants;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
 
@@ -35,18 +34,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     private JMenuItem mntmRegistroVentas;
     private JMenu mnArchivo;
     private JMenuItem mntmSalir;
-    private JLabel lblNewLabel;
-    private JLabel lblNewLabel_1;
-    private JPanel panel;
-    private JPanel panel_1;
-    private JPanel panel_2;
-    private JLabel lblNewLabel_2;
-    private JLabel lblNewLabel_3;
-    private JLabel lblNewLabel_4;
-    private JLabel lblNumeroDeVentas;
-    private JLabel lblProductosEnStockBajo;
-    private JLabel lblNuevosClientes;
-    private JLabel lblNewLabel_5;
 
     /**
      * Launch the application.
@@ -69,7 +56,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
      */
     public MenuPrincipal() {
     	
-    	setTitle("Inicio - Computron");
+    	setTitle("ChulloTec");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1008, 592);
         setLocationRelativeTo(null);
@@ -78,85 +65,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
-        lblNewLabel = new JLabel("Bienvenido al Sistema de Gestion");
-        lblNewLabel.setForeground(new Color(255, 255, 255));
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setFont(new Font("Open Sans", Font.PLAIN, 27));
-        lblNewLabel.setBounds(242, 33, 508, 157);
-        contentPane.add(lblNewLabel);
-        
-        lblNewLabel_1 = new JLabel("Estadisticas :");
-        lblNewLabel_1.setForeground(new Color(255, 255, 255));
-        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_1.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
-        lblNewLabel_1.setBounds(448, 176, 96, 14);
-        contentPane.add(lblNewLabel_1);
-        
-        panel = new JPanel();
-        panel.setBounds(51, 243, 262, 157);
-        contentPane.add(panel);
-        panel.setLayout(null);
-        
-        lblNewLabel_2 = new JLabel("Ventas del dia");
-        lblNewLabel_2.setBounds(96, 5, 69, 16);
-        lblNewLabel_2.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        panel.add(lblNewLabel_2);
-        
-        lblNumeroDeVentas = new JLabel("0");
-        lblNumeroDeVentas.setFont(new Font("Open Sans", Font.PLAIN, 30));
-        lblNumeroDeVentas.setForeground(new Color(0, 128, 255));
-        lblNumeroDeVentas.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNumeroDeVentas.setBounds(41, 33, 180, 90);
-        panel.add(lblNumeroDeVentas);
-        
-        panel_1 = new JPanel();
-        panel_1.setBounds(364, 243, 262, 157);
-        contentPane.add(panel_1);
-        panel_1.setLayout(null);
-        
-        lblNewLabel_3 = new JLabel("Productos con Stock bajo");
-        lblNewLabel_3.setBounds(70, 5, 122, 16);
-        lblNewLabel_3.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        panel_1.add(lblNewLabel_3);
-        
-        lblProductosEnStockBajo = new JLabel("0");
-        lblProductosEnStockBajo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblProductosEnStockBajo.setForeground(new Color(0, 128, 255));
-        lblProductosEnStockBajo.setFont(new Font("Open Sans", Font.PLAIN, 30));
-        lblProductosEnStockBajo.setBounds(41, 33, 180, 90);
-        panel_1.add(lblProductosEnStockBajo);
-        
-        panel_2 = new JPanel();
-        panel_2.setBounds(677, 243, 262, 157);
-        contentPane.add(panel_2);
-        panel_2.setLayout(null);
-        
-        lblNewLabel_4 = new JLabel("Nuevos clientes");
-        lblNewLabel_4.setBounds(93, 5, 75, 16);
-        lblNewLabel_4.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        panel_2.add(lblNewLabel_4);
-        
-        lblNuevosClientes = new JLabel("0");
-        lblNuevosClientes.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNuevosClientes.setForeground(new Color(0, 128, 255));
-        lblNuevosClientes.setFont(new Font("Open Sans", Font.PLAIN, 30));
-        lblNuevosClientes.setBounds(41, 33, 180, 90);
-        panel_2.add(lblNuevosClientes);
-        
-        lblNewLabel_5 = new JLabel("New label");
-        lblNewLabel_5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/LogoCibertec.jpg")));
-        lblNewLabel_5.setBounds(503, 30, 489, 466);
-        contentPane.add(lblNewLabel_5);
 
         // Crear JMenuBar
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(0, 43, 74));
+        menuBar.setMargin(new Insets(0, 0, 0, 500));
         setJMenuBar(menuBar);
         
         mnArchivo = new JMenu("Archivo");
-        mnArchivo.setForeground(new Color(255, 255, 255));
-        mnArchivo.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        mnArchivo.setFont(new Font("Open Sans", Font.PLAIN, 12));
         menuBar.add(mnArchivo);
         
         mntmSalir = new JMenuItem("Salir");
@@ -166,8 +82,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
         // Crear JMenu Mantenimiento
         JMenu mnMantenimiento = new JMenu("Mantenimiento");
-        mnMantenimiento.setForeground(new Color(255, 255, 255));
-        mnMantenimiento.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        mnMantenimiento.setFont(new Font("Open Sans", Font.PLAIN, 12));
         menuBar.add(mnMantenimiento);
 
         // Subopciones del menú Mantenimiento
@@ -183,8 +98,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 
         // Otras opciones del menú principal
         mnVentas = new JMenu("Ventas");
-        mnVentas.setForeground(new Color(255, 255, 255));
-        mnVentas.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        mnVentas.setFont(new Font("Open Sans", Font.PLAIN, 12));
         mnVentas.addActionListener(this);
         menuBar.add(mnVentas);
         
@@ -194,8 +108,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         mnVentas.add(mntmRegistroVentas);
 
         JMenu mnAlmacen = new JMenu("Almacén");
-        mnAlmacen.setForeground(new Color(255, 255, 255));
-        mnAlmacen.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        mnAlmacen.setFont(new Font("Open Sans", Font.PLAIN, 12));
         menuBar.add(mnAlmacen);
         
         mntmAlmacen = new JMenuItem("Ir a Almacen");
@@ -204,8 +117,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         mnAlmacen.add(mntmAlmacen);
 
         JMenu mnReportes = new JMenu("Reportes");
-        mnReportes.setForeground(new Color(255, 255, 255));
-        mnReportes.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        mnReportes.setFont(new Font("Open Sans", Font.PLAIN, 12));
         menuBar.add(mnReportes);
         
         mntmReportes = new JMenuItem("Ir reportes");
