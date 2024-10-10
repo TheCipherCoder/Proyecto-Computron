@@ -11,9 +11,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 
 public class Reportes extends JFrame implements ActionListener {
 
@@ -41,18 +38,12 @@ public class Reportes extends JFrame implements ActionListener {
     public Reportes() {
         setTitle("Mas frio que felpudini - Reportes");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 833, 529);
+        setBounds(100, 100, 600, 400);
         setLocationRelativeTo(null);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(0, 59, 93));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(Reportes.class.getResource("/imagenes/LogoCibertec.jpg")));
-        lblNewLabel.setBounds(265, -133, 664, 726);
-        contentPane.add(lblNewLabel);
 
         // Crear JMenuBar
         JMenuBar menuBar = new JMenuBar();
