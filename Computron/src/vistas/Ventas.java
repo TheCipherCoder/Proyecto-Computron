@@ -31,12 +31,13 @@ public class Ventas extends JFrame implements ActionListener {
 	private JLabel lblProducto;
 	private JComboBox comboBox;
 	private JLabel lblCantidad;
-	private JTextField textField_2;
+	private JTextField txtCantidad;
 	private JButton btnNewButton;
 	private JScrollPane scrollPane;
-	private JTextArea textArea;
-	private JLabel lblNewLabel;
+	private JLabel lblVentas;
 	private MenuPrincipal menuprincipal;
+	private JButton btnBuscar;
+	private JTextArea txtBoleta;
 
 	/**
 	 * Launch the application.
@@ -62,74 +63,88 @@ public class Ventas extends JFrame implements ActionListener {
 	 */
 	public Ventas() {
 		
+		setTitle("Ventas");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\perez\\Downloads\\ventas.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 610, 573);
+		setBounds(100, 100, 810, 610);
         setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 59, 93));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblApellido = new JLabel("Apellidos del cliente:");
+		lblApellido.setForeground(Color.WHITE);
 		lblApellido.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblApellido.setBounds(10, 115, 187, 33);
+		lblApellido.setBounds(10, 89, 187, 33);
 		contentPane.add(lblApellido);
 		
 		lblNombre_1 = new JLabel("Nombres del cliente:");
+		lblNombre_1.setForeground(Color.WHITE);
 		lblNombre_1.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblNombre_1.setBounds(10, 69, 187, 33);
+		lblNombre_1.setBounds(10, 47, 187, 33);
 		contentPane.add(lblNombre_1);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(167, 73, 409, 27);
+		txtNombre.setBounds(167, 51, 169, 27);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
+		txtNombre.setEditable(false);
 		
 		JTextField txtApellido = new JTextField();
 		txtApellido.setColumns(10);
-		txtApellido.setBounds(167, 119, 409, 27);
+		txtApellido.setBounds(167, 91, 335, 27);
+		txtApellido.setEditable(false);
 		contentPane.add(txtApellido);
 		
 		lblProducto = new JLabel("C\u00F3digo del producto:");
+		lblProducto.setForeground(Color.WHITE);
 		lblProducto.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblProducto.setBounds(10, 159, 187, 33);
+		lblProducto.setBounds(10, 133, 187, 33);
 		contentPane.add(lblProducto);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(167, 163, 409, 27);
+		comboBox.setBounds(167, 133, 335, 27);
 		contentPane.add(comboBox);
 		
 		lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setForeground(Color.WHITE);
 		lblCantidad.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblCantidad.setBounds(10, 203, 187, 33);
+		lblCantidad.setBounds(10, 171, 187, 33);
 		contentPane.add(lblCantidad);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(167, 203, 409, 27);
-		contentPane.add(textField_2);
+		txtCantidad = new JTextField();
+		txtCantidad.setColumns(10);
+		txtCantidad.setBounds(167, 177, 335, 27);
+		contentPane.add(txtCantidad);
 		
 		btnNewButton = new JButton("Generar boleta");
 		btnNewButton.addActionListener(this);
 		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(51, 255, 0));
+		btnNewButton.setBackground(Color.GRAY);
 		btnNewButton.setFont(new Font("Open Sans", Font.BOLD, 14));
-		btnNewButton.setBounds(10, 247, 566, 38);
+		btnNewButton.setBounds(607, 53, 157, 137);
 		contentPane.add(btnNewButton);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 296, 566, 227);
+		scrollPane.setBounds(10, 215, 774, 345);
 		contentPane.add(scrollPane);
 		
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		txtBoleta = new JTextArea();
+		txtBoleta.setEditable(false);
+		scrollPane.setViewportView(txtBoleta);
 		
-		lblNewLabel = new JLabel("Ventas");
-		lblNewLabel.setFont(new Font("Open Sans", Font.BOLD, 25));
-		lblNewLabel.setBounds(253, 11, 134, 35);
-		contentPane.add(lblNewLabel);
+		lblVentas = new JLabel("Ventas");
+		lblVentas.setForeground(Color.WHITE);
+		lblVentas.setFont(new Font("Open Sans", Font.BOLD, 25));
+		lblVentas.setBounds(364, 1, 134, 35);
+		contentPane.add(lblVentas);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(364, 47, 138, 33);
+		contentPane.add(btnBuscar);
 		
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
 		
