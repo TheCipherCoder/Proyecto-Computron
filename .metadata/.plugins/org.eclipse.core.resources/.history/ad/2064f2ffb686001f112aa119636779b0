@@ -18,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.ImageIcon;
 
 public class MantenimientoCliente extends JDialog implements ActionListener {
 	
@@ -53,7 +52,6 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	public final static int CONSULTAR = 1;
 	public final static int MODIFICAR = 2;
 	public final static int ELIMINAR  = 3;
-	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -235,11 +233,6 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		txtDni.setColumns(10);
 		txtDni.setBounds(90, 135, 129, 23);
 		getContentPane().add(txtDni);
-		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MantenimientoCliente.class.getResource("/imagenes/LogoCibertec.jpg")));
-		lblNewLabel.setBounds(290, 10, 575, 470);
-		getContentPane().add(lblNewLabel);
 		
 		ajustarAnchoColumnas();
 		listar();
