@@ -7,6 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -15,10 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
-
+import javax.swing.ImageIcon;
+import vistas.MenuPrincipal;
 public class MantenimientoProducto extends JDialog implements ActionListener {
 	
 	private JLabel lblCodigo;
@@ -52,6 +56,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	public final static int CONSULTAR = 1;
 	public final static int MODIFICAR = 2;
 	public final static int ELIMINAR  = 3;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -80,7 +85,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		setTitle("Mantenimiento | Cliente");
 		setBounds(100, 100, 810, 610);
 		getContentPane().setLayout(null);
-		
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		lblCodigo = new JLabel("C\u00F3digo");
 		lblCodigo.setForeground(new Color(255, 255, 255));
 		lblCodigo.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -234,8 +239,22 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		txtStockActual.setBounds(101, 136, 129, 23);
 		getContentPane().add(txtStockActual);
 		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MantenimientoProducto.class.getResource("/imagenes/LogoCibertec.jpg")));
+		lblNewLabel.setBounds(233, -33, 575, 470);
+		getContentPane().add(lblNewLabel);
+		
 		ajustarAnchoColumnas();
 		listar();
+		
+		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		
+		addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                menuPrincipal.setVisible(true); 
+            }
+        });
 	}
 	
 	//  Declaración global

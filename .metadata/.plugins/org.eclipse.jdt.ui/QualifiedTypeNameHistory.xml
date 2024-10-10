@@ -4,11 +4,12 @@
     <fullyQualifiedTypeName name="vistas.Mantenimiento"/>
     <fullyQualifiedTypeName name="vistas.Clientes.Consulta"/>
     <fullyQualifiedTypeName name="vistas.Clientes.Modificar"/>
-    <fullyQualifiedTypeName name="vistas.MenuPrincipal"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
-    <fullyQualifiedTypeName name="vistas.MantenimientoProducto"/>
     <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="vistas.Ventas"/>
+    <fullyQualifiedTypeName name="vistas.MantenimientoCliente"/>
+    <fullyQualifiedTypeName name="vistas.MantenimientoProducto"/>
+    <fullyQualifiedTypeName name="vistas.MenuPrincipal"/>
 </qualifiedTypeNameHistroy>

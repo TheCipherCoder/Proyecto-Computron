@@ -7,7 +7,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -16,26 +15,24 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import vistas.MenuPrincipal;
-public class MantenimientoCliente extends JDialog implements ActionListener {
+
+public class MantenimientoProducto extends JDialog implements ActionListener {
 	
 	private JLabel lblCodigo;
 	private JLabel lblNombre;
-	private JLabel lblApellido;
-	private JLabel lblDireccion;
-	private JLabel lblTelefono;
-	private JLabel lblDni;
+	private JLabel lblPrecio;
+	private JLabel lblStockMaximo;
+	private JLabel lblStockMinimo;
+	private JLabel lblStockActual;
 	private JTextField txtCodigo;
 	private JTextField txtNombre;
-	private JTextField txtApellido;
-	private JTextField txtDireccion;
-	private JTextField txtTelefono;
+	private JTextField txtPrecio;
+	private JTextField txtStockMaximo;
+	private JTextField txtStockMinimo;
 	private JButton btnBuscar;
 	private JButton btnOK;
 	private JButton btnOpciones;
@@ -46,7 +43,7 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	private JScrollPane scrollPane;
 	private JTable tblCliente;
 	private DefaultTableModel modelo;
-	private JTextField txtDni;
+	private JTextField txtStockActual;
 
 	//  Tipo de operación a procesar: Adicionar, Consultar, Modificar o Eliminar
 	private int tipoOperacion;
@@ -65,7 +62,7 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MantenimientoCliente dialog = new MantenimientoCliente();
+					MantenimientoProducto dialog = new MantenimientoProducto();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				}
@@ -79,13 +76,13 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public MantenimientoCliente() {
+	public MantenimientoProducto() {
 		getContentPane().setBackground(new Color(0, 59, 93));
 		setResizable(false);
 		setTitle("Mantenimiento | Cliente");
 		setBounds(100, 100, 810, 610);
 		getContentPane().setLayout(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		lblCodigo = new JLabel("C\u00F3digo");
 		lblCodigo.setForeground(new Color(255, 255, 255));
 		lblCodigo.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -98,29 +95,29 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		lblNombre.setBounds(10, 35, 70, 23);
 		getContentPane().add(lblNombre);
 	
-		lblApellido = new JLabel("Apellido");
-		lblApellido.setForeground(new Color(255, 255, 255));
-		lblApellido.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		lblApellido.setBounds(10, 60, 70, 23);
-		getContentPane().add(lblApellido);
+		lblPrecio = new JLabel("Precio");
+		lblPrecio.setForeground(new Color(255, 255, 255));
+		lblPrecio.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		lblPrecio.setBounds(10, 60, 70, 23);
+		getContentPane().add(lblPrecio);
 		
-		lblDireccion = new JLabel("Direccion");
-		lblDireccion.setForeground(new Color(255, 255, 255));
-		lblDireccion.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		lblDireccion.setBounds(10, 85, 70, 23);
-		getContentPane().add(lblDireccion);
+		lblStockMaximo = new JLabel("Stock Maximo");
+		lblStockMaximo.setForeground(new Color(255, 255, 255));
+		lblStockMaximo.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		lblStockMaximo.setBounds(10, 85, 166, 23);
+		getContentPane().add(lblStockMaximo);
 		
-		lblTelefono = new JLabel("Telefono");
-		lblTelefono.setForeground(new Color(255, 255, 255));
-		lblTelefono.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		lblTelefono.setBounds(10, 110, 70, 23);
-		getContentPane().add(lblTelefono);
+		lblStockMinimo = new JLabel("Stock Minimo");
+		lblStockMinimo.setForeground(new Color(255, 255, 255));
+		lblStockMinimo.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		lblStockMinimo.setBounds(10, 110, 152, 23);
+		getContentPane().add(lblStockMinimo);
 		
-		lblDni = new JLabel("Dni");
-		lblDni.setForeground(new Color(255, 255, 255));
-		lblDni.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		lblDni.setBounds(10, 135, 86, 23);
-		getContentPane().add(lblDni);
+		lblStockActual = new JLabel("Stock Actual");
+		lblStockActual.setForeground(new Color(255, 255, 255));
+		lblStockActual.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		lblStockActual.setBounds(10, 135, 86, 23);
+		getContentPane().add(lblStockActual);
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -136,26 +133,26 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
 
-		txtApellido = new JTextField();
-		txtApellido.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		txtApellido.setBounds(90, 60, 251, 23);
-		getContentPane().add(txtApellido);
-		txtApellido.setEditable(false);
-		txtApellido.setColumns(10);
+		txtPrecio = new JTextField();
+		txtPrecio.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		txtPrecio.setBounds(189, 60, 152, 23);
+		getContentPane().add(txtPrecio);
+		txtPrecio.setEditable(false);
+		txtPrecio.setColumns(10);
 		
-		txtDireccion = new JTextField();
-		txtDireccion.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		txtDireccion.setBounds(90, 85, 251, 23);
-		getContentPane().add(txtDireccion);
-		txtDireccion.setEditable(false);
-		txtDireccion.setColumns(10);
+		txtStockMaximo = new JTextField();
+		txtStockMaximo.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		txtStockMaximo.setBounds(189, 85, 152, 23);
+		getContentPane().add(txtStockMaximo);
+		txtStockMaximo.setEditable(false);
+		txtStockMaximo.setColumns(10);
 
-		txtTelefono = new JTextField();
-		txtTelefono.setFont(new Font("Open Sans", Font.PLAIN, 13));
-		txtTelefono.setBounds(90, 110, 251, 23);
-		getContentPane().add(txtTelefono);
-		txtTelefono.setEditable(false);
-		txtTelefono.setColumns(10);
+		txtStockMinimo = new JTextField();
+		txtStockMinimo.setFont(new Font("Open Sans", Font.PLAIN, 13));
+		txtStockMinimo.setBounds(189, 110, 152, 23);
+		getContentPane().add(txtStockMinimo);
+		txtStockMinimo.setEditable(false);
+		txtStockMinimo.setColumns(10);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -227,34 +224,25 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		modelo = new DefaultTableModel();
 		modelo.addColumn("CÓDIGO");
 		modelo.addColumn("NOMBRE");
-		modelo.addColumn("APELLIDO");
-		modelo.addColumn("DNI");
-		modelo.addColumn("DIRECCION");
-		modelo.addColumn("TELEFONO");
+		modelo.addColumn("PRECIO");
+		modelo.addColumn("STOCK ACTUAL");
+		modelo.addColumn("STOCK MINIMO");
+		modelo.addColumn("STOCK MAXIMO");
 		tblCliente.setModel(modelo);
 		
-		txtDni = new JTextField();
-		txtDni.setEditable(false);
-		txtDni.setColumns(10);
-		txtDni.setBounds(90, 135, 129, 23);
-		getContentPane().add(txtDni);
+		txtStockActual = new JTextField();
+		txtStockActual.setEditable(false);
+		txtStockActual.setColumns(10);
+		txtStockActual.setBounds(101, 136, 129, 23);
+		getContentPane().add(txtStockActual);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MantenimientoCliente.class.getResource("/imagenes/LogoCibertec.jpg")));
-		lblNewLabel.setBounds(290, 10, 575, 470);
+		lblNewLabel.setIcon(new ImageIcon(MantenimientoProducto.class.getResource("/imagenes/LogoCibertec.jpg")));
+		lblNewLabel.setBounds(233, -33, 575, 470);
 		getContentPane().add(lblNewLabel);
 		
 		ajustarAnchoColumnas();
 		listar();
-		
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
-		
-		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                menuPrincipal.setVisible(true); 
-            }
-        });
 	}
 	
 	//  Declaración global
@@ -379,10 +367,10 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	void habilitarEntradas(boolean sino) {
 		
 		txtNombre.setEditable(sino);
-		txtTelefono.setEditable(sino);
-		txtApellido.setEditable(sino);
-		txtDireccion.setEditable(sino);
-		txtDni.setEditable(sino);
+		txtStockMinimo.setEditable(sino);
+		txtPrecio.setEditable(sino);
+		txtStockMaximo.setEditable(sino);
+		txtStockActual.setEditable(sino);
 		
 		
 	}
@@ -414,19 +402,19 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	}
 	
 	String leerApellido() {
-		return txtApellido.getText().trim();
+		return txtPrecio.getText().trim();
 	}
 	
 	
 	String leerDni() {
-		return txtDni.getText().trim();
+		return txtStockActual.getText().trim();
 	}
 	String leerDireccion() {
-		return txtDireccion.getText().trim();
+		return txtStockMaximo.getText().trim();
 	}
 
 	String leerTelefono() {
-		return txtTelefono.getText().trim();
+		return txtStockMinimo.getText().trim();
 	}
 
 	//  Métodos que retornan valor (con parámetros)

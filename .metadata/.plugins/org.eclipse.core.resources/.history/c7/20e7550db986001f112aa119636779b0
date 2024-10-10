@@ -16,13 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import vistas.MenuPrincipal;
+
 public class MantenimientoCliente extends JDialog implements ActionListener {
 	
 	private JLabel lblCodigo;
@@ -80,12 +78,13 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 	public MantenimientoCliente() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setBackground(new Color(0, 59, 93));
 		setResizable(false);
 		setTitle("Mantenimiento | Cliente");
 		setBounds(100, 100, 810, 610);
 		getContentPane().setLayout(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		lblCodigo = new JLabel("C\u00F3digo");
 		lblCodigo.setForeground(new Color(255, 255, 255));
 		lblCodigo.setFont(new Font("Open Sans", Font.PLAIN, 13));
@@ -246,15 +245,6 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		
 		ajustarAnchoColumnas();
 		listar();
-		
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
-		
-		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                menuPrincipal.setVisible(true); 
-            }
-        });
 	}
 	
 	//  Declaración global
