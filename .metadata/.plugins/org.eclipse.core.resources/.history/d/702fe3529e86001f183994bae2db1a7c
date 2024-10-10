@@ -9,4 +9,10 @@ public class ArregloProductos {
 	public ArregloProductos() {
 		productos = new ArrayList<Producto>();
 	}
+	
+	//Operaciones publicas basicas
+	public int largo() {
+		return productos.size();
+	}
+
 }

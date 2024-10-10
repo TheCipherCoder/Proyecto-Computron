@@ -9,4 +9,5 @@ public class ArregloProductos {
 	public ArregloProductos() {
 		productos = new ArrayList<Producto>();
 	}
+
 }

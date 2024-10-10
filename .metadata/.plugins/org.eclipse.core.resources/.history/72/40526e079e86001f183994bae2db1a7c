@@ -1,7 +1,7 @@
 package clases;
 
 public class Cliente {
-	
+    // Atributos
     private int codigoCliente;
     private String nombres;
     private String apellidos;
@@ -9,6 +9,7 @@ public class Cliente {
     private String telefono;
     private String dni;
 
+    // Constructor
     public Cliente(String nombres, String apellidos, String direccion, String telefono, String dni) {
         this.codigoCliente = generarCodigoCliente(); 
         this.nombres = nombres;
@@ -18,11 +19,13 @@ public class Cliente {
         this.dni = dni;
     }
 
+    // Metodo para generar un código de cliente autogenerado y correlativo
     private static int contadorCodigoCliente = 1001; 
     private int generarCodigoCliente() {
         return contadorCodigoCliente++;
     }
 
+    // Getters y Setters
     public int getCodigoCliente() {
         return codigoCliente;
     }

@@ -18,11 +18,13 @@ public class Producto {
         this.stockMaximo = stockMaximo;
     }
 
+    // Metodo para generar un código de producto autogenerado y correlativo
     private static int contadorCodigoProducto = 2001;
     private int generarCodigoProducto() {
         return contadorCodigoProducto++;
     }
 
+    // Getters y Setters
     public int getCodigoProducto() {
         return codigoProducto;
     }

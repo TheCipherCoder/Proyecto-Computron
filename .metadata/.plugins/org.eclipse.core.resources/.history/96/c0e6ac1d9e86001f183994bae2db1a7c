@@ -23,6 +23,7 @@ public class Producto {
         return contadorCodigoProducto++;
     }
 
+    // Getters y Setters
     public int getCodigoProducto() {
         return codigoProducto;
     }
