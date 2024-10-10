@@ -14,13 +14,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Toolkit;
-
-
+import javax.swing.JOptionPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import vistas.MenuPrincipal;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Ventas extends JFrame {
+public class Ventas extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -42,13 +43,12 @@ public class Ventas extends JFrame {
 	 */
 	public static void main(String[] args) {
 
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
-        menuPrincipal.setVisible(true);
+		
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventas frame = new Ventas(menuPrincipal);
+					Ventas frame = new Ventas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,8 +60,8 @@ public class Ventas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Ventas(MenuPrincipal menuPrincipal) {
-		this.menuprincipal = menuPrincipal;
+	public Ventas() {
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\perez\\Downloads\\ventas.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 610, 573);
@@ -112,6 +112,7 @@ public class Ventas extends JFrame {
 		contentPane.add(textField_2);
 		
 		btnNewButton = new JButton("Generar boleta");
+		btnNewButton.addActionListener(this);
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(51, 255, 0));
 		btnNewButton.setFont(new Font("Open Sans", Font.BOLD, 14));
@@ -129,12 +130,23 @@ public class Ventas extends JFrame {
 		lblNewLabel.setFont(new Font("Open Sans", Font.BOLD, 25));
 		lblNewLabel.setBounds(253, 11, 134, 35);
 		contentPane.add(lblNewLabel);
-
+		
+		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 menuPrincipal.setVisible(true); 
             }
         });
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
+		}
+	}
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		
+		JOptionPane.showMessageDialog(this, "Venta realizada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

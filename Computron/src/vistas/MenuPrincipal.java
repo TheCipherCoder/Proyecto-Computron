@@ -148,7 +148,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	
 	/* Ventas */
 	protected void actionPerformedMntmNewMenuItem(ActionEvent e) {
-		Ventas v = new Ventas(this);
+		Ventas v = new Ventas();
 		v.setVisible(true);
 		this.setVisible(false);
 	}
