@@ -35,18 +35,18 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     private JMenuItem mntmRegistroVentas;
     private JMenu mnArchivo;
     private JMenuItem mntmSalir;
-    private JLabel lblEncabezado;
-    private JLabel lblSubtitulo;
-    private JPanel pnlVentasDelDia;
-    private JPanel pnlProductosStockBajo;
-    private JPanel pnlNuevosClientes;
-    private JLabel lblVentasDelDia;
-    private JLabel lblProductosConStock;
-    private JLabel lblClientes;
+    private JLabel lblNewLabel;
+    private JLabel lblNewLabel_1;
+    private JPanel panel;
+    private JPanel panel_1;
+    private JPanel panel_2;
+    private JLabel lblNewLabel_2;
+    private JLabel lblNewLabel_3;
+    private JLabel lblNewLabel_4;
     private JLabel lblNumeroDeVentas;
     private JLabel lblProductosEnStockBajo;
     private JLabel lblNuevosClientes;
-    private JLabel lblLogoCibertec;
+    private JLabel lblNewLabel_5;
 
     /**
      * Launch the application.
@@ -79,75 +79,75 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        lblEncabezado = new JLabel("Bienvenido al Sistema de Gestion");
-        lblEncabezado.setForeground(new Color(255, 255, 255));
-        lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
-        lblEncabezado.setFont(new Font("Open Sans", Font.PLAIN, 27));
-        lblEncabezado.setBounds(242, 33, 508, 157);
-        contentPane.add(lblEncabezado);
+        lblNewLabel = new JLabel("Bienvenido al Sistema de Gestion");
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("Open Sans", Font.PLAIN, 27));
+        lblNewLabel.setBounds(242, 33, 508, 157);
+        contentPane.add(lblNewLabel);
         
-        lblSubtitulo = new JLabel("Estadisticas :");
-        lblSubtitulo.setForeground(new Color(255, 255, 255));
-        lblSubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblSubtitulo.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
-        lblSubtitulo.setBounds(448, 176, 96, 14);
-        contentPane.add(lblSubtitulo);
+        lblNewLabel_1 = new JLabel("Estadisticas :");
+        lblNewLabel_1.setForeground(new Color(255, 255, 255));
+        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_1.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        lblNewLabel_1.setBounds(448, 176, 96, 14);
+        contentPane.add(lblNewLabel_1);
         
-        pnlVentasDelDia = new JPanel();
-        pnlVentasDelDia.setBounds(51, 243, 262, 157);
-        contentPane.add(pnlVentasDelDia);
-        pnlVentasDelDia.setLayout(null);
+        panel = new JPanel();
+        panel.setBounds(51, 243, 262, 157);
+        contentPane.add(panel);
+        panel.setLayout(null);
         
-        lblVentasDelDia = new JLabel("Ventas del dia");
-        lblVentasDelDia.setBounds(96, 5, 69, 16);
-        lblVentasDelDia.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        pnlVentasDelDia.add(lblVentasDelDia);
+        lblNewLabel_2 = new JLabel("Ventas del dia");
+        lblNewLabel_2.setBounds(96, 5, 69, 16);
+        lblNewLabel_2.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
+        panel.add(lblNewLabel_2);
         
         lblNumeroDeVentas = new JLabel("0");
         lblNumeroDeVentas.setFont(new Font("Open Sans", Font.PLAIN, 30));
         lblNumeroDeVentas.setForeground(new Color(0, 128, 255));
         lblNumeroDeVentas.setHorizontalAlignment(SwingConstants.CENTER);
         lblNumeroDeVentas.setBounds(41, 33, 180, 90);
-        pnlVentasDelDia.add(lblNumeroDeVentas);
+        panel.add(lblNumeroDeVentas);
         
-        pnlProductosStockBajo = new JPanel();
-        pnlProductosStockBajo.setBounds(364, 243, 262, 157);
-        contentPane.add(pnlProductosStockBajo);
-        pnlProductosStockBajo.setLayout(null);
+        panel_1 = new JPanel();
+        panel_1.setBounds(364, 243, 262, 157);
+        contentPane.add(panel_1);
+        panel_1.setLayout(null);
         
-        lblProductosConStock = new JLabel("Productos con Stock bajo");
-        lblProductosConStock.setBounds(70, 5, 122, 16);
-        lblProductosConStock.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        pnlProductosStockBajo.add(lblProductosConStock);
+        lblNewLabel_3 = new JLabel("Productos con Stock bajo");
+        lblNewLabel_3.setBounds(70, 5, 122, 16);
+        lblNewLabel_3.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
+        panel_1.add(lblNewLabel_3);
         
         lblProductosEnStockBajo = new JLabel("0");
         lblProductosEnStockBajo.setHorizontalAlignment(SwingConstants.CENTER);
         lblProductosEnStockBajo.setForeground(new Color(0, 128, 255));
         lblProductosEnStockBajo.setFont(new Font("Open Sans", Font.PLAIN, 30));
         lblProductosEnStockBajo.setBounds(41, 33, 180, 90);
-        pnlProductosStockBajo.add(lblProductosEnStockBajo);
+        panel_1.add(lblProductosEnStockBajo);
         
-        pnlNuevosClientes = new JPanel();
-        pnlNuevosClientes.setBounds(677, 243, 262, 157);
-        contentPane.add(pnlNuevosClientes);
-        pnlNuevosClientes.setLayout(null);
+        panel_2 = new JPanel();
+        panel_2.setBounds(677, 243, 262, 157);
+        contentPane.add(panel_2);
+        panel_2.setLayout(null);
         
-        lblClientes = new JLabel("Nuevos clientes");
-        lblClientes.setBounds(93, 5, 75, 16);
-        lblClientes.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
-        pnlNuevosClientes.add(lblClientes);
+        lblNewLabel_4 = new JLabel("Nuevos clientes");
+        lblNewLabel_4.setBounds(93, 5, 75, 16);
+        lblNewLabel_4.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
+        panel_2.add(lblNewLabel_4);
         
         lblNuevosClientes = new JLabel("0");
         lblNuevosClientes.setHorizontalAlignment(SwingConstants.CENTER);
         lblNuevosClientes.setForeground(new Color(0, 128, 255));
         lblNuevosClientes.setFont(new Font("Open Sans", Font.PLAIN, 30));
         lblNuevosClientes.setBounds(41, 33, 180, 90);
-        pnlNuevosClientes.add(lblNuevosClientes);
+        panel_2.add(lblNuevosClientes);
         
-        lblLogoCibertec = new JLabel("New label");
-        lblLogoCibertec.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/LogoCibertec.jpg")));
-        lblLogoCibertec.setBounds(503, 30, 489, 466);
-        contentPane.add(lblLogoCibertec);
+        lblNewLabel_5 = new JLabel("New label");
+        lblNewLabel_5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/LogoCibertec.jpg")));
+        lblNewLabel_5.setBounds(503, 30, 489, 466);
+        contentPane.add(lblNewLabel_5);
 
         // Crear JMenuBar
         JMenuBar menuBar = new JMenuBar();

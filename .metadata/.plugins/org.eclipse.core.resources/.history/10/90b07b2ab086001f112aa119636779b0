@@ -20,7 +20,6 @@ import java.awt.event.WindowEvent;
 import vistas.MenuPrincipal;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
 public class Ventas extends JFrame implements ActionListener {
 
@@ -39,7 +38,6 @@ public class Ventas extends JFrame implements ActionListener {
 	private MenuPrincipal menuprincipal;
 	private JButton btnBuscar;
 	private JTextArea txtBoleta;
-	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -147,11 +145,6 @@ public class Ventas extends JFrame implements ActionListener {
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(364, 47, 138, 33);
 		contentPane.add(btnBuscar);
-		
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Ventas.class.getResource("/imagenes/LogoCibertec.jpg")));
-		lblNewLabel.setBounds(222, 5, 781, 560);
-		contentPane.add(lblNewLabel);
 		
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
 		
