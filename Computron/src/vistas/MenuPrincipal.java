@@ -23,6 +23,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import vistas.MantenimientoCliente;
+import vistas.MantenimientoProducto;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
 
@@ -145,7 +147,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         pnlNuevosClientes.add(lblNuevosClientes);
         
         lblLogoCibertec = new JLabel("New label");
-        lblLogoCibertec.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/LogoCibertec.jpg")));
+        //lblLogoCibertec.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/LogoCibertec.jpg")));
         lblLogoCibertec.setBounds(503, 30, 489, 466);
         contentPane.add(lblLogoCibertec);
 
@@ -213,8 +215,6 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         mntmReportes.addActionListener(this);
         mnReportes.add(mntmReportes);
 
-        // Cargar imagen de Felpudini
-        ImageIcon icon = new ImageIcon("ruta/a/tu/imagen/felpudini.jpg");
     }
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mntmSalir) {
@@ -241,7 +241,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	protected void actionPerformedMiClientes(ActionEvent e) {
 		MantenimientoCliente mc = new MantenimientoCliente();
 		mc.setVisible(true);
-		this.setVisible(false);
+		this.setVisible(false);	
 	}
 	
 	

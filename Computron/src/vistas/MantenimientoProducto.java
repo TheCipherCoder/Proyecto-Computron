@@ -82,7 +82,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	public MantenimientoProducto() {
 		getContentPane().setBackground(new Color(0, 59, 93));
 		setResizable(false);
-		setTitle("Mantenimiento | Cliente");
+		setTitle("Mantenimiento | Prodfucuctos");
 		setBounds(100, 100, 810, 610);
 		getContentPane().setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
