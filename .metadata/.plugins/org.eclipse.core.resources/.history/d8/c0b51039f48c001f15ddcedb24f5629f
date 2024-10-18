@@ -1,0 +1,97 @@
+package arreglos;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import clases.Cliente;
+import clases.Producto;
+public class ArregloProductos {
+	ArrayList<Producto> productos;
+	
+	public ArregloProductos() {
+		productos = new ArrayList<Producto>();
+	}
+	
+//  Operaciones públicas básicas
+	public void adicionar(Producto x) {
+		productos.add(x);
+	}
+	public int tamano() {
+		return productos.size();
+	}
+	public Producto obtener(int i) {
+		return productos.get(i);
+	}
+	public Producto buscar(int codigo) {
+		Producto x;
+		for (int i=0; i<tamano(); i++) {
+			x = obtener(i);
+			if (x.getCodigo() == codigo)
+				return x;
+		}
+		return null;
+	}
+	
+	public void eliminar(Producto x) {
+		productos.remove(x);
+	}
+	//  Operaciones públicas complementarias
+	public int codigoCorrelativo() {
+		if (tamano() == 0)
+			return 3001;
+		else
+			return obtener(tamano()-1).getCodigo() + 1;		
+	}
+	
+	void grabarProducto() {
+		try {
+			PrintWriter pw;
+			String linea;
+			Producto x;
+			
+			pw = new PrintWriter(new FileWriter("productos.txt"));
+			for(int i = 0; i<tamano(); i++) {
+				x= obtener(i);
+				linea = x.getCodigo() + ";"+
+						x.getNombre() + ";" +
+						x.getPrecio() + ";" +
+						x.getStockMaximo() + ";" +
+						x.getStockMinimo() + ";" +
+						x.getStockActual()+ ";";
+				pw.println(linea);
+			}
+			pw.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	private void cargarClientes() {
+		try {
+			BufferedReader br;
+			int codigo;
+			String nombre;
+			String[] s;
+			//int codigo, String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo
+			br = new BufferedReader(new FileReader("productos.txt"));
+			while ((linea = br.readLine()) != null) {
+				s = linea.split(";");
+				codigo = Integer.parseInt(s[0].trim());
+				dni = s[1].trim();
+				nombres = s[2].trim();
+				apellidos = s[3].trim();
+				direccion = s[4].trim();
+				telefono = s[5].trim();
+				adicionar(new Producto(codigo, nombres, apellidos, direccion, telefono, dni));
+			}
+			br.close();
+		}
+		
+		catch (Exception e) {
+			
+		}
+	}
+}

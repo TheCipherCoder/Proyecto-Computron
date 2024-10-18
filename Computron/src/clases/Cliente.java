@@ -9,7 +9,8 @@ public class Cliente {
     private String telefono;
     private String dni;
 
-    public Cliente(String nombres, String apellidos, String direccion, String telefono, String dni) {
+    public Cliente(int codigo, String nombres, String apellidos, String direccion, String telefono, String dni) {
+		this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.direccion = direccion;

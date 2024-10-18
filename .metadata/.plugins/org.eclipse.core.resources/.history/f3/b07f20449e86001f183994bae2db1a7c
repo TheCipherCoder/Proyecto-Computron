@@ -1,5 +1,0 @@
-package arreglos;
-import clases.Cliente;
-public class ArregloClientes {
-	
-}

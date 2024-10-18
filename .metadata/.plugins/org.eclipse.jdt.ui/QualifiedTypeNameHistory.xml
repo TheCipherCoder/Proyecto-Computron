@@ -6,10 +6,19 @@
     <fullyQualifiedTypeName name="vistas.Clientes.Modificar"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
-    <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="vistas.Ventas"/>
+    <fullyQualifiedTypeName name="vistas.MenuPrincipal"/>
     <fullyQualifiedTypeName name="vistas.MantenimientoCliente"/>
     <fullyQualifiedTypeName name="vistas.MantenimientoProducto"/>
-    <fullyQualifiedTypeName name="vistas.MenuPrincipal"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloClientes"/>
+    <fullyQualifiedTypeName name="clases.Cliente"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloProductos"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.lang.Process"/>
+    <fullyQualifiedTypeName name="clases.Producto"/>
 </qualifiedTypeNameHistroy>

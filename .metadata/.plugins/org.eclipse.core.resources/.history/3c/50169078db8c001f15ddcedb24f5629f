@@ -1,0 +1,108 @@
+package arreglos;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import clases.Cliente;
+public class ArregloClientes {
+	ArrayList<Cliente> clientes;
+	
+	public ArregloClientes() {
+		clientes = new ArrayList<Cliente>();
+    	cargarClientes();
+	}
+	
+//  Operaciones públicas básicas
+	public void adicionar(Cliente x) {
+		clientes.add(x);
+		grabarCliente();
+	}
+	public int tamano() {
+		return clientes.size();
+	}
+	public Cliente obtener(int i) {
+		return clientes.get(i);
+	}
+	public Cliente buscar(int codigo) {
+		Cliente x;
+		for (int i=0; i<tamano(); i++) {
+			x = obtener(i);
+			if (x.getCodigo() == codigo)
+				return x;
+		}
+		return null;
+	}
+	public Cliente buscar(String dni) {
+		Cliente x;
+		for (int i=0; i<tamano(); i++) {
+			x = obtener(i);
+			if (x.getDni().equals(dni))
+				return x;
+		}
+		return null;
+	}
+	public void eliminar(Cliente x) {
+		clientes.remove(x);
+	}
+	
+	public void actualizarArchivo() {
+		grabarCliente();
+	}
+	
+	public void grabarCliente() {
+		try {
+			PrintWriter pw;
+			String linea;
+			Cliente x;
+			
+			pw = new PrintWriter(new FileWriter("clientes.txt"));
+			for(int i = 0; i<tamano(); i++) {
+				x= obtener(i);
+				linea = x.getDni() + ";" +
+						x.getNombres() + ";" +
+						x.getApellidos() + ";" +
+						x.getDireccion() + ";" +
+						x.getTelefono()+ ";";
+				pw.println(linea);
+			}
+			pw.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	private void cargarClientes() {
+		try {
+			BufferedReader br;
+			String linea, nombres, apellidos, direccion, telefono, dni;
+			String[] s;
+			
+			br = new BufferedReader(new FileReader("clientes.txt"));
+			while ((linea = br.readLine()) != null) {
+				s = linea.split(";");				
+				dni = s[0].trim();
+				nombres = s[1].trim();
+				apellidos = s[2].trim();
+				direccion = s[3].trim();
+				telefono = s[4].trim();
+				adicionar(new Cliente(nombres, apellidos, direccion, telefono, dni));
+			}
+			br.close();
+		}
+		
+		catch (Exception e) {
+			
+		}
+	}
+	
+	//  Operaciones públicas complementarias
+	public int codigoCorrelativo() {
+		if (tamano() == 0)
+			return 2001;
+		else
+			return obtener(tamano()-1).getCodigo() + 1;		
+	}
+}

@@ -1,20 +1,26 @@
 package arreglos;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import clases.Cliente;
 import clases.Producto;
-
 public class ArregloProductos {
 	ArrayList<Producto> productos;
 	
 	public ArregloProductos() {
 		productos = new ArrayList<Producto>();
+		cargarProductos();
 	}
 	
 //  Operaciones públicas básicas
 	public void adicionar(Producto x) {
 		productos.add(x);
+		grabarProducto();
 	}
-	public int tamaño() {
+	public int tamano() {
 		return productos.size();
 	}
 	public Producto obtener(int i) {
@@ -22,7 +28,7 @@ public class ArregloProductos {
 	}
 	public Producto buscar(int codigo) {
 		Producto x;
-		for (int i=0; i<tamaño(); i++) {
+		for (int i=0; i<tamano(); i++) {
 			x = obtener(i);
 			if (x.getCodigo() == codigo)
 				return x;
@@ -32,12 +38,70 @@ public class ArregloProductos {
 	
 	public void eliminar(Producto x) {
 		productos.remove(x);
+		grabarProducto();
 	}
+	
+	public void actualizarArchivo() {
+		grabarProducto();
+	}
+	
 	//  Operaciones públicas complementarias
 	public int codigoCorrelativo() {
-		if (tamaño() == 0)
+		if (tamano() == 0)
 			return 3001;
 		else
-			return obtener(tamaño()-1).getCodigo() + 1;		
+			return obtener(tamano()-1).getCodigo() + 1;		
+	}
+	
+	void grabarProducto() {
+		try {
+			PrintWriter pw;
+			String linea;
+			Producto x;
+			
+			pw = new PrintWriter(new FileWriter("productos.txt"));
+			for(int i = 0; i<tamano(); i++) {
+				x= obtener(i);
+				linea = x.getCodigo() + ";"+
+						x.getNombre() + ";" +
+						x.getPrecio() + ";" +
+						x.getStockMaximo() + ";" +
+						x.getStockMinimo() + ";" +
+						x.getStockActual()+ ";";
+				pw.println(linea);
+			}
+			pw.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	private void cargarProductos() {
+		try {
+			BufferedReader br;
+			int codigo;
+			String linea, nombre;
+			double precio;
+			int stockActual, stockMinimo, stockMaximo;
+			String[] s;
+
+			br = new BufferedReader(new FileReader("productos.txt"));
+			while ((linea = br.readLine()) != null) {
+				s = linea.split(";");
+				codigo = Integer.parseInt(s[0].trim());
+				nombre = s[1].trim();
+				precio = Double.parseDouble(s[2].trim());
+				stockMaximo = Integer.parseInt(s[3].trim());
+				stockMinimo = Integer.parseInt(s[4].trim());
+				stockActual = Integer.parseInt(s[5].trim());
+				adicionar(new Producto(codigo, nombre, precio, stockActual, stockMinimo, stockMaximo));
+			}
+			br.close();
+		}
+		
+		catch (Exception e) {
+			
+		}
 	}
 }

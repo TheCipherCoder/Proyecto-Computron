@@ -9,8 +9,9 @@ public class Producto {
     private int stockMinimo;
     private int stockMaximo;
 
-    public Producto(String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
-        this.nombre = nombre;
+    public Producto(int codigo, String nombre, double precio, int stockActual, int stockMinimo, int stockMaximo) {
+        this.codigo= codigo;
+    	this.nombre = nombre;
         this.precio = precio;
         this.stockActual = stockActual;
         this.stockMinimo = stockMinimo;

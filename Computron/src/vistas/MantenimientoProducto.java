@@ -15,6 +15,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import arreglos.ArregloProductos;
+import clases.Cliente;
+import clases.Producto;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -82,7 +87,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	public MantenimientoProducto() {
 		getContentPane().setBackground(new Color(0, 59, 93));
 		setResizable(false);
-		setTitle("Mantenimiento | Prodfucuctos");
+		setTitle("Mantenimiento | Producto");
 		setBounds(100, 100, 810, 610);
 		getContentPane().setLayout(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -244,7 +249,8 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		lblNewLabel.setBounds(233, -33, 575, 470);
 		getContentPane().add(lblNewLabel);
 		
-		ajustarAnchoColumnas();
+		habilitarEntradas(false);
+		habilitarBotones(true);
 		listar();
 		
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
@@ -258,7 +264,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	}
 	
 	//  Declaración global
-
+	ArregloProductos ap = new ArregloProductos();
 	
 	
 	public void actionPerformed(ActionEvent arg0) {
@@ -291,41 +297,40 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 			habilitarEntradas(true);
 		};
 		
-		consultarPersona();
+		consultarProducto();
 	}
 	protected void actionPerformedBtnOK(ActionEvent arg0) {
 		switch (tipoOperacion) {
 			case ADICIONAR:
-				adicionarPersona();
+				adicionarProducto();
 				break;
 			case CONSULTAR:
-				consultarPersona();
+				consultarProducto();
 				break;
 			case MODIFICAR:
-				modificarPersona();
+				modificarProducto();
 				break;
 			case ELIMINAR:
-				eliminarPersona();
+				eliminarProducto();
 		}
 	}
 	protected void actionPerformedBtnOpciones(ActionEvent arg0) {
-		
-		txtCodigo.setText("");
+		txtCodigo.setEditable(false);
+		txtNombre.setText("");
+		txtPrecio.setText("");
+		txtStockActual.setText("");
+		txtStockMaximo.setText("");
+		txtStockMinimo.setText("");
 		habilitarEntradas(false);
 		habilitarBotones(true);
-	
 	}
 	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
 		
 		tipoOperacion = ADICIONAR;
-		txtCodigo.setText("001");
+		txtCodigo.setText("" + ap.codigoCorrelativo());
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
-		
-		
-		
-		
 		
 	}
 	protected void actionPerformedBtnConsultar(ActionEvent arg0) {
@@ -351,30 +356,205 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		habilitarBotones(false);
 		txtCodigo.requestFocus();
 	}
-	//  Métodos tipo void (sin parámetros)
-	void ajustarAnchoColumnas() {
-		TableColumnModel tcm = tblCliente.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(anchoColumna( 8));  // codigo
-		tcm.getColumn(1).setPreferredWidth(anchoColumna(18));  // nombre
-		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  // dni
-		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  // peso
-		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  // estatura
-		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  // estadoCivil
-	}
+	
 	void listar() {
-		
+		Producto x;
+		modelo.setRowCount(0);
+		for (int i=0; i<ap.tamano(); i++) {
+			x = ap.obtener(i);
+			Object[] fila = { x.getCodigo(),
+							  x.getNombre(),
+							  x.getPrecio(),
+							  x.getStockActual(),
+							  x.getStockMinimo(),
+							  x.getStockMaximo() };
+			 modelo.addRow(fila);
+		}
 	}
-	void adicionarPersona() {
 	
-	}
-	void consultarPersona() {
-	}
-	void modificarPersona() {
-	
-	}
-	void eliminarPersona() {
+	void adicionarProducto() {
+	    int codigo = leerCodigo();
+	    String nombre = leerNombre();
 
+	    if (nombre.length() > 0) {
+	        try {
+	            double precio = leerPrecio();
+	            if (precio >= 0) {
+	                try {
+	                    int stockMaximo = leerStockMaximo();
+	                    if (stockMaximo > 0) {
+	                        try {
+	                            int stockMinimo = leerStockMinimo();
+	                            if (stockMinimo >= 0) {
+	                                try {
+	                                    int stockActual = leerStockActual();
+	                                    if (stockActual >= 0) {
+	                                        if (stockActual >= stockMinimo && stockActual <= stockMaximo) {
+	                                            try {
+	                                                Producto nuevo = new Producto(codigo, nombre, precio, stockActual, stockMinimo, stockMaximo);
+	                                                ap.adicionar(nuevo);
+	                                                txtCodigo.setText("" + ap.codigoCorrelativo());
+	                                                listar();
+
+	                                                // Limpiar los campos de texto
+	                                                txtNombre.setText("");
+	                                                txtPrecio.setText("");
+	                                                txtStockActual.setText("");
+	                                                txtStockMaximo.setText("");
+	                                                txtStockMinimo.setText("");
+	                                            } catch (Exception e) {
+	                                                error("Error al adicionar el producto: " + e.getMessage(), null);
+	                                            }
+	                                        } else {
+	                                            error("El STOCK ACTUAL debe estar entre el STOCK MINIMO y el STOCK MAXIMO", txtStockActual);
+	                                        }
+	                                    } else {
+	                                        error("Ingrese un STOCK ACTUAL correcto, por favor", txtStockActual);
+	                                    }
+	                                } catch (NumberFormatException e) {
+	                                    error("Ingrese un valor numérico válido para el STOCK ACTUAL", txtStockActual);
+	                                }
+	                            } else {
+	                                error("Ingrese un STOCK MINIMO correcto, por favor", txtStockMinimo);
+	                            }
+	                        } catch (NumberFormatException e) {
+	                            error("Ingrese un valor numérico válido para el STOCK MINIMO", txtStockMinimo);
+	                        }
+	                    } else {
+	                        error("Ingrese un STOCK MAXIMO correcto, por favor", txtStockMaximo);
+	                    }
+	                } catch (NumberFormatException e) {
+	                    error("Ingrese un valor numérico válido para el STOCK MAXIMO", txtStockMaximo);
+	                }
+	            } else {
+	                error("Ingrese un PRECIO correcto, por favor", txtPrecio);
+	            }
+	        } catch (NumberFormatException e) {
+	            error("Ingrese un valor numérico válido para el PRECIO", txtPrecio);
+	        }
+	    } else {
+	        error("Ingrese un NOMBRE correcto, por favor", txtNombre);
+	    }
 	}
+
+	
+	void consultarProducto() {
+		try {
+			int codigo = leerCodigo();
+			Producto x = ap.buscar(codigo);
+			if (x != null) {
+				txtNombre.setText(x.getNombre());
+				txtPrecio.setText(""+ x.getPrecio());
+				txtStockActual.setText(""+ x.getStockActual());
+				txtStockMaximo.setText(""+ x.getStockMaximo());
+				txtStockMinimo.setText(""+ x.getStockMinimo());
+				
+				if (tipoOperacion == MODIFICAR) {
+					habilitarEntradas(true);
+					txtCodigo.setEditable(false);
+					btnBuscar.setEnabled(false);
+					btnOK.setEnabled(true);
+					txtNombre.requestFocus();
+				}
+				if (tipoOperacion == ELIMINAR) {
+					txtCodigo.setEditable(false);
+					btnBuscar.setEnabled(false);
+					btnOK.setEnabled(true);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtCodigo);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtCodigo);
+		}
+	}
+	void modificarProducto() {
+		try {
+			   int codigo = leerCodigo();
+			    String nombre = leerNombre();
+
+			    if (nombre.length() > 0) {
+			        try {
+			            double precio = leerPrecio();
+			            if (precio >= 0) {
+			                try {
+			                    int stockMaximo = leerStockMaximo();
+			                    if (stockMaximo > 0) {
+			                        try {
+			                            int stockMinimo = leerStockMinimo();
+			                            if (stockMinimo >= 0) {
+			                                try {
+			                                    int stockActual = leerStockActual();
+			                                    if (stockActual >= 0) {
+			                                        if (stockActual >= stockMinimo && stockActual <= stockMaximo) {
+			                                            try {
+			                                                txtNombre.setText(nombre);
+			                                                txtPrecio.setText(precio + "");
+			                                                txtStockActual.setText(stockActual+ "");
+			                                                txtStockMaximo.setText(stockMaximo+ "");
+			                                                txtStockMinimo.setText(stockMinimo+ "");
+			        	                                    ap.actualizarArchivo();
+			        	                                    listar();
+			        	                                    txtNombre.requestFocus();
+			                                            } catch (Exception e) {
+			                                                error("Error al adicionar el producto: " + e.getMessage(), null);
+			                                            }
+			                                        } else {
+			                                            error("El STOCK ACTUAL debe estar entre el STOCK MINIMO y el STOCK MAXIMO", txtStockActual);
+			                                        }
+			                                    } else {
+			                                        error("Ingrese un STOCK ACTUAL correcto, por favor", txtStockActual);
+			                                    }
+			                                } catch (NumberFormatException e) {
+			                                    error("Ingrese un valor numérico válido para el STOCK ACTUAL", txtStockActual);
+			                                }
+			                            } else {
+			                                error("Ingrese un STOCK MINIMO correcto, por favor", txtStockMinimo);
+			                            }
+			                        } catch (NumberFormatException e) {
+			                            error("Ingrese un valor numérico válido para el STOCK MINIMO", txtStockMinimo);
+			                        }
+			                    } else {
+			                        error("Ingrese un STOCK MAXIMO correcto, por favor", txtStockMaximo);
+			                    }
+			                } catch (NumberFormatException e) {
+			                    error("Ingrese un valor numérico válido para el STOCK MAXIMO", txtStockMaximo);
+			                }
+			            } else {
+			                error("Ingrese un PRECIO correcto, por favor", txtPrecio);
+			            }
+			        } catch (NumberFormatException e) {
+			            error("Ingrese un valor numérico válido para el PRECIO", txtPrecio);
+			        }
+			    } else {
+			        error("Ingrese un NOMBRE correcto, por favor", txtNombre);
+			    }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	void eliminarProducto() {
+		try {
+			int codigo = leerCodigo();
+			Producto x = ap.buscar(codigo);
+			if (x != null) {
+				int ok = confirmar("¿ Desea eliminar el registro ?");
+				if (ok == 0) {
+					ap.eliminar(x);
+					listar();
+					btnOK.setEnabled(false);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtCodigo);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtCodigo);
+		}
+	}
+	
 	//  Métodos tipo void (con parámetros)
 	void habilitarEntradas(boolean sino) {
 		
@@ -386,8 +566,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		
 		
 	}
-	void habilitarBotones(boolean sino) {
-		
+	void habilitarBotones(boolean sino) {	
 		if (tipoOperacion == ADICIONAR)
 			btnOK.setEnabled(!sino);
 		else {
@@ -400,37 +579,47 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 		btnEliminar.setEnabled(sino);
 		btnOpciones.setEnabled(!sino);	
 	}
+	
 	void mensaje(String s) {
-		
+		JOptionPane.showMessageDialog(this, s, "Información", 0);
 	}
+	
 	void error(String s, JTextField txt) {
+		mensaje(s);
+		txt.setText("");
+		txt.requestFocus();
 	}
+	
+	
 	//  Métodos que retornan valor (sin parámetros)
 	int leerCodigo() {
 		return Integer.parseInt(txtCodigo.getText().trim());
 	}
+	
 	String leerNombre() {
 		return txtNombre.getText().trim();
 	}
 	
-	String leerApellido() {
-		return txtPrecio.getText().trim();
+	double leerPrecio() {
+		return Double.parseDouble(txtPrecio.getText().trim());
 	}
 	
-	
-	String leerDni() {
-		return txtStockActual.getText().trim();
+	int leerStockMinimo() {
+		return Integer.parseInt(txtStockMinimo.getText().trim());
 	}
-	String leerDireccion() {
-		return txtStockMaximo.getText().trim();
+	
+	int leerStockActual() {
+		return Integer.parseInt(txtStockActual.getText().trim());
+	}
+	int leerStockMaximo() {
+		return Integer.parseInt(txtStockMaximo.getText().trim());
 	}
 
 	String leerTelefono() {
 		return txtStockMinimo.getText().trim();
 	}
-
-	//  Métodos que retornan valor (con parámetros)
-	int anchoColumna(int porcentaje) {
-		return porcentaje * scrollPane.getWidth() / 100;
+	
+	int confirmar(String s) {
+		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 }

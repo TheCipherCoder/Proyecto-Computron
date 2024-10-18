@@ -15,6 +15,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import arreglos.ArregloClientes;
+import clases.Cliente;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -226,9 +230,9 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 
 		modelo = new DefaultTableModel();
 		modelo.addColumn("CÓDIGO");
+		modelo.addColumn("DNI");
 		modelo.addColumn("NOMBRE");
 		modelo.addColumn("APELLIDO");
-		modelo.addColumn("DNI");
 		modelo.addColumn("DIRECCION");
 		modelo.addColumn("TELEFONO");
 		tblCliente.setModel(modelo);
@@ -244,11 +248,11 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		lblNewLabel.setBounds(290, 10, 575, 470);
 		getContentPane().add(lblNewLabel);
 		
-		ajustarAnchoColumnas();
+		habilitarEntradas(false);
+		habilitarBotones(true);
 		listar();
 		
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
-		
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -258,8 +262,7 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	}
 	
 	//  Declaración global
-
-	
+	ArregloClientes ac = new ArregloClientes();
 	
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnEliminar) {
@@ -284,19 +287,16 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 			actionPerformedBtnBuscar(arg0);
 		}
 	}
+	
+
+	
 	protected void actionPerformedBtnBuscar(ActionEvent arg0) {
-		
-		if (tipoOperacion == MODIFICAR) {
-			
-			habilitarEntradas(true);
-		};
-		
 		consultarPersona();
 	}
 	protected void actionPerformedBtnOK(ActionEvent arg0) {
 		switch (tipoOperacion) {
 			case ADICIONAR:
-				adicionarPersona();
+				adicionarCliente();
 				break;
 			case CONSULTAR:
 				consultarPersona();
@@ -309,24 +309,22 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnOpciones(ActionEvent arg0) {
-		
-		txtCodigo.setText("");
+		txtCodigo.setEditable(false);
+		txtNombre.setText("");
+		txtDni.setText("");
+		txtApellido.setText("");
+		txtDireccion.setText("");
+		txtTelefono.setText("");
 		habilitarEntradas(false);
 		habilitarBotones(true);
 	
 	}
 	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
-		
 		tipoOperacion = ADICIONAR;
-		txtCodigo.setText("001");
+		txtCodigo.setText("" + ac.codigoCorrelativo());
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
-		
-		
-		
-		
-		
 	}
 	protected void actionPerformedBtnConsultar(ActionEvent arg0) {
 		
@@ -351,30 +349,181 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		habilitarBotones(false);
 		txtCodigo.requestFocus();
 	}
-	//  Métodos tipo void (sin parámetros)
-	void ajustarAnchoColumnas() {
-		TableColumnModel tcm = tblCliente.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(anchoColumna( 8));  // codigo
-		tcm.getColumn(1).setPreferredWidth(anchoColumna(18));  // nombre
-		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  // dni
-		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  // peso
-		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  // estatura
-		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  // estadoCivil
-	}
+	
 	void listar() {
-		
+		Cliente x;
+		modelo.setRowCount(0);
+		for (int i=0; i<ac.tamano(); i++) {
+			x = ac.obtener(i);
+			Object[] fila = { x.getCodigo(),
+							  x.getDni(),
+							  x.getNombres(),
+							  x.getApellidos(),
+							  x.getDireccion(),
+							  x.getTelefono() };
+			modelo.addRow(fila);
+		}
 	}
-	void adicionarPersona() {
 	
-	}
-	void consultarPersona() {
-	}
-	void modificarPersona() {
-	
-	}
-	void eliminarPersona() {
+	void adicionarCliente() {
+	    int codigo = leerCodigo();
+	    String nombres = leerNombre();
 
+	    if (nombres.length() > 0) {
+	        String apellidos = leerApellido();
+	        if (apellidos.length() > 0) {
+	            try {
+	                String direccion = leerDireccion();
+	                if (direccion.length() > 0) {
+	                    try {
+	                        String telefono = leerTelefono();
+	                        if (telefono.length() > 0) {
+	                            String dni = leerDni();
+	                            if (dni.length() > 0) {
+	                                if (ac.buscar(dni) == null) {
+	                                    Cliente nuevo = new Cliente(codigo, nombres, apellidos, direccion, telefono, dni);
+	                                    ac.adicionar(nuevo);
+	                                    listar();
+	                                    txtCodigo.setText("" + ac.codigoCorrelativo());
+	                                    txtNombre.setText("");
+	                                    txtApellido.setText("");
+	                                    txtDireccion.setText("");
+	                                    txtTelefono.setText("");
+	                                    txtDni.setText("");
+	                                } else {
+	                                    error("El DNI " + dni + " ya existe", txtDni);
+	                                }
+	                            } else {
+	                                error("Ingrese DNI correcto, por favor", txtDni);
+	                            }
+	                        } else {
+	                            error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                        }
+	                    } catch (Exception e) {
+	                        error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                    }
+	                } else {
+	                    error("Ingrese DIRECCION válida, por favor", txtDireccion);
+	                }
+	            } catch (Exception e) {
+	                error("Ingrese DIRECCION válida, por favor", txtDireccion);
+	            }
+	        } else {
+	            error("Ingrese APELLIDO correcto, por favor", txtApellido);
+	        }
+	    } else {
+	        error("Ingrese NOMBRE correcto, por favor", txtNombre);
+	    }
 	}
+
+
+	
+	void consultarPersona() {
+		try {
+			int codigo = leerCodigo();
+			Cliente x = ac.buscar(codigo);
+			if (x != null) {
+				txtNombre.setText(x.getNombres());
+				txtDni.setText(x.getDni());
+				txtApellido.setText(x.getApellidos());
+				txtDireccion.setText(x.getDireccion());
+				txtTelefono.setText(x.getTelefono());
+				
+				if (tipoOperacion == MODIFICAR) {
+					habilitarEntradas(true);
+					txtCodigo.setEditable(false);
+					btnBuscar.setEnabled(false);
+					btnOK.setEnabled(true);
+					txtNombre.requestFocus();
+				}
+				if (tipoOperacion == ELIMINAR) {
+					txtCodigo.setEditable(false);
+					btnBuscar.setEnabled(false);
+					btnOK.setEnabled(true);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtCodigo);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtCodigo);
+		}
+	}
+	
+	void modificarPersona() {
+	    try {
+	        int codigo = leerCodigo();
+	        Cliente x = ac.buscar(codigo);
+
+	        if (x != null) {
+	            String nombre = leerNombre();
+	            if (nombre.length() > 0) {
+	                String apellido = leerApellido();
+	                if (apellido.length() > 0) {
+	                    String direccion = leerDireccion();
+	                    if (direccion.length() > 0) {
+	                        String telefono = leerTelefono();
+	                        if (telefono.length() > 0) {
+	                            String dni = leerDni();
+	                            if (dni.length() > 0) {
+	                                try {
+	                                    x.setNombres(nombre);
+	                                    x.setApellidos(apellido);
+	                                    x.setDireccion(direccion);
+	                                    x.setTelefono(telefono);
+	                                    x.setDni(dni);
+	                                    ac.actualizarArchivo();
+	                                    listar();
+	                                    txtNombre.requestFocus();
+	                                } catch (Exception e) {
+	                                    
+	                                }
+	                            } else {
+	                                error("Ingrese DNI correcto, por favor", txtDni);
+	                            }
+	                        } else {
+	                            error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                        }
+	                    } else {
+	                        error("Ingrese DIRECCION correcta, por favor", txtDireccion);
+	                    }
+	                } else {
+	                    error("Ingrese APELLIDO correcto, por favor", txtApellido);
+	                }
+	            } else {
+	                error("Ingrese NOMBRE correcto, por favor", txtNombre);
+	            }
+	        } else {
+	            error("El código " + codigo + " no existe", txtCodigo);
+	        }
+
+	    } catch (Exception e) {
+	        error("Ingrese CODIGO correcto, por favor", txtCodigo);
+	    }
+	}
+
+	
+	
+	void eliminarPersona() {
+		try {
+			int codigo = leerCodigo();
+			Cliente x = ac.buscar(codigo);
+			if (x != null) {
+				int ok = confirmar("¿ Desea eliminar el registro ?");
+				if (ok == 0) {
+					ac.eliminar(x);
+					listar();
+					btnOK.setEnabled(false);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtCodigo);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtCodigo);
+		}
+	}
+	
 	//  Métodos tipo void (con parámetros)
 	void habilitarEntradas(boolean sino) {
 		
@@ -393,18 +542,24 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		else {
 			btnBuscar.setEnabled(!sino);
 			btnOK.setEnabled(false);
-		}	
+		}	  
 		btnAdicionar.setEnabled(sino);
 		btnConsultar.setEnabled(sino);
 		btnModificar.setEnabled(sino);
 		btnEliminar.setEnabled(sino);
 		btnOpciones.setEnabled(!sino);	
 	}
+	
 	void mensaje(String s) {
-		
+		JOptionPane.showMessageDialog(this, s, "Información", 0);
 	}
+	
 	void error(String s, JTextField txt) {
+		mensaje(s);
+		txt.setText("");
+		txt.requestFocus();
 	}
+	
 	//  Métodos que retornan valor (sin parámetros)
 	int leerCodigo() {
 		return Integer.parseInt(txtCodigo.getText().trim());
@@ -417,7 +572,6 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		return txtApellido.getText().trim();
 	}
 	
-	
 	String leerDni() {
 		return txtDni.getText().trim();
 	}
@@ -428,9 +582,8 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	String leerTelefono() {
 		return txtTelefono.getText().trim();
 	}
-
-	//  Métodos que retornan valor (con parámetros)
-	int anchoColumna(int porcentaje) {
-		return porcentaje * scrollPane.getWidth() / 100;
+	
+	int confirmar(String s) {
+		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 }
