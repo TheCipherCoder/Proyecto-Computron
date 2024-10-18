@@ -17,8 +17,10 @@
     <fullyQualifiedTypeName name="arreglos.ArregloClientes"/>
     <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloProductos"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="java.lang.Process"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloVenta"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloProductos"/>
     <fullyQualifiedTypeName name="clases.Producto"/>
+    <fullyQualifiedTypeName name="clases.Venta"/>
 </qualifiedTypeNameHistroy>

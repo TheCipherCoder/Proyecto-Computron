@@ -1,4 +1,5 @@
 package clases;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,66 +13,61 @@ public class Venta {
     private String fecha;
 
     // Constructor
-    public Venta(int codigoCliente, int codigoProducto, int cantidad, double precio) {
-        this.codigoVenta = generarCodigoVenta(); 
+    public Venta(int codigoVenta, int codigoCliente, int codigoProducto, int cantidad, double precio, String fecha) {
+        this.codigoVenta = codigoVenta; 
         this.codigoCliente = codigoCliente;
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
         this.precio = precio;
-        this.fecha = obtenerFechaActual();
+        this.fecha = fecha;
     }
-
-    // Metodo para generar un código de venta autogenerado y correlativo
-    private static int contadorCodigoVenta = 3001; 
-    private int generarCodigoVenta() {
-        return contadorCodigoVenta++;
-    }
-
-    // Metodo para obtener la fecha actual en el formato mm/dd/aaaa
-    private String obtenerFechaActual() {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("MM/dd/yyyy");
-        Date fechaActual = new Date();
-        return formatoFecha.format(fechaActual);
-    }
-
-    // Getters y Setters
+    
     public int getCodigoVenta() {
-        return codigoVenta;
-    }
+		return codigoVenta;
+	}
 
-    public int getCodigoCliente() {
-        return codigoCliente;
-    }
+	public void setCodigoVenta(int codigoVenta) {
+		this.codigoVenta = codigoVenta;
+	}
 
-    public void setCodigoCliente(int codigoCliente) {
-        this.codigoCliente = codigoCliente;
-    }
+	public int getCodigoCliente() {
+		return codigoCliente;
+	}
 
-    public int getCodigoProducto() {
-        return codigoProducto;
-    }
+	public void setCodigoCliente(int codigoCliente) {
+		this.codigoCliente = codigoCliente;
+	}
 
-    public void setCodigoProducto(int codigoProducto) {
-        this.codigoProducto = codigoProducto;
-    }
+	public int getCodigoProducto() {
+		return codigoProducto;
+	}
 
-    public int getCantidad() {
-        return cantidad;
-    }
+	public void setCodigoProducto(int codigoProducto) {
+		this.codigoProducto = codigoProducto;
+	}
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
+	public int getCantidad() {
+		return cantidad;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public String getFecha() {
-        return fecha;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	} 
+
 }

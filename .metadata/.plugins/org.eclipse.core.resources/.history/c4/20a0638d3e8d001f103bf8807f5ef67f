@@ -1,0 +1,120 @@
+package arreglos;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import clases.Cliente;
+import clases.Venta;
+
+public class ArregloVenta {
+    private ArrayList<Venta> ventas;
+
+    // Constructor
+    public ArregloVenta() {
+        ventas = new ArrayList<Venta>();
+        cargarVentas();
+    }
+    
+    // Operaciones publicas basicas
+    public void adicionar(Venta v) {
+        ventas.add(v);
+        grabarVenta();
+    }
+
+    public int tamano() {
+    	return ventas.size();
+    }
+    
+    public Venta obtener(int i) {
+    	return ventas.get(i);
+    }
+    
+    public Venta buscar(int codigoVenta) {
+    	Venta v;
+    	for(int i = 0; i<tamano(); i++) {
+    		v = obtener(i);
+    		if(v.getCodigoVenta() == codigoVenta) {
+    			return v;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void eliminar(Venta v) {
+    	ventas.remove(v);
+    	grabarVenta();
+    }
+    
+    public void actualizarArchivo() {
+    	grabarVenta();
+    }
+
+    // Método para obtener el total de ventas
+    public double obtenerTotalVentas() {
+        double total = 0;
+        for (Venta venta : ventas) {
+            total += venta.getPrecio();
+        }
+        return total;
+    }
+
+    // Método para obtener ventas por cliente
+    public ArrayList<Venta> obtenerVentasPorCliente(int codigoCliente) {
+        ArrayList<Venta> ventasPorCliente = new ArrayList<>();
+        for (Venta venta : ventas) {
+            if (venta.getCodigoCliente() == codigoCliente) {
+                ventasPorCliente.add(venta);
+            }
+        }
+        return ventasPorCliente;
+    }
+
+    // Método para obtener productos vendidos acumulados
+    public int obtenerUnidadesVendidas(int codigoProducto) {
+        int totalUnidades = 0;
+        for (Venta venta : ventas) {
+            if (venta.getCodigoProducto() == codigoProducto) {
+                totalUnidades += venta.getCantidad();
+            }
+        }
+        return totalUnidades;
+    }
+
+    // Método para obtener el total por producto
+    public double obtenerTotalPorProducto(int codigoProducto) {
+        double total = 0;
+        for (Venta venta : ventas) {
+            if (venta.getCodigoProducto() == codigoProducto) {
+                total += venta.getPrecio(); // Usa el método correcto para el total
+            }
+        }
+        return total;
+    }
+    
+    public void grabarCliente() {
+		try {
+			PrintWriter pw;
+			String linea;
+			Cliente x;
+			
+			pw = new PrintWriter(new FileWriter("ventas.txt"));
+			for(int i = 0; i<tamano(); i++) {
+				x= obtener(i);
+				linea = x.getCodigo() + ";"+
+						x.getDni() + ";" +
+						x.getNombres() + ";" +
+						x.getApellidos() + ";" +
+						x.getDireccion() + ";" +
+						x.getTelefono()+ ";";
+				pw.println(linea);
+			}
+			pw.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+    
+    
+}
