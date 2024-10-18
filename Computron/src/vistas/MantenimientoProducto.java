@@ -389,7 +389,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	                                try {
 	                                    int stockActual = leerStockActual();
 	                                    if (stockActual >= 0) {
-	                                        if (stockActual >= stockMinimo && stockActual <= stockMaximo) {
+	                                        if (stockActual >= 0) {
 	                                            try {
 	                                                Producto nuevo = new Producto(codigo, nombre, precio, stockActual, stockMinimo, stockMaximo);
 	                                                ap.adicionar(nuevo);
@@ -406,7 +406,7 @@ public class MantenimientoProducto extends JDialog implements ActionListener {
 	                                                error("Error al adicionar el producto: " + e.getMessage(), null);
 	                                            }
 	                                        } else {
-	                                            error("El STOCK ACTUAL debe estar entre el STOCK MINIMO y el STOCK MAXIMO", txtStockActual);
+	                                            error("El STOCK ACTUAL debe ser mayor o igual que cero, porfavor", txtStockActual);
 	                                        }
 	                                    } else {
 	                                        error("Ingrese un STOCK ACTUAL correcto, por favor", txtStockActual);

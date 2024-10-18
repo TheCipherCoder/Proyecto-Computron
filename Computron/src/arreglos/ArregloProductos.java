@@ -20,12 +20,15 @@ public class ArregloProductos {
 		productos.add(x);
 		grabarProducto();
 	}
+	
 	public int tamano() {
 		return productos.size();
 	}
+	
 	public Producto obtener(int i) {
 		return productos.get(i);
 	}
+	
 	public Producto buscar(int codigo) {
 		Producto x;
 		for (int i=0; i<tamano(); i++) {
