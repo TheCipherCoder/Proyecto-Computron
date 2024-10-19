@@ -1,7 +1,6 @@
 package vistas;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,154 +14,234 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import vistas.MenuPrincipal;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import arreglos.ArregloVenta;
+import arreglos.ArregloProductos;
+import arreglos.ArregloClientes;
+import clases.Producto;
+import clases.Venta;
+import clases.Cliente;
 
 public class Ventas extends JFrame implements ActionListener {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel lblApellido;
-	private JLabel lblNombre;
+	private JTextField txtCodigoCliente;
 	private JTextField txtNombre;
-	private JLabel lblProducto;
-	private JComboBox cboCodigo;
-	private JLabel lblCantidad;
+	private JTextField txtApellido;
 	private JTextField txtCantidad;
-	private JButton btnNewButton;
-	private JScrollPane scrollPane;
-	private JLabel lblVentas;
-	private MenuPrincipal menuprincipal;
-	private JButton btnBuscar;
+	private JComboBox<String> cboCodigo;
 	private JTextArea txtBoleta;
+	private ArregloVenta arregloVentas;
+	private ArregloProductos arregloProductos;
+	private ArregloClientes arregloClientes;
+	private JButton btnGenerarBoleta;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-
-		
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ventas frame = new Ventas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Ventas frame = new Ventas();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Ventas() {
-		
+		arregloVentas = new ArregloVenta();
+		arregloProductos = new ArregloProductos();
+		arregloClientes = new ArregloClientes(); // Initialize clients array
+
 		setTitle("Ventas");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\perez\\Downloads\\ventas.png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 810, 610);
-        setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 59, 93));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		lblApellido = new JLabel("Apellidos del cliente:");
-		lblApellido.setForeground(Color.WHITE);
-		lblApellido.setFont(new Font("Open Sans", Font.BOLD, 14));
-		lblApellido.setBounds(10, 89, 187, 33);
-		contentPane.add(lblApellido);
-		
-		lblNombre = new JLabel("Nombres del cliente:");
+
+		JLabel lblCodigoCliente = new JLabel("Código del cliente:");
+		lblCodigoCliente.setForeground(Color.WHITE);
+		lblCodigoCliente.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblCodigoCliente.setBounds(10, 10, 187, 33);
+		contentPane.add(lblCodigoCliente);
+
+		txtCodigoCliente = new JTextField();
+		txtCodigoCliente.setBounds(167, 14, 169, 27);
+		contentPane.add(txtCodigoCliente);
+		txtCodigoCliente.setColumns(10);
+
+		JLabel lblNombre = new JLabel("Nombres del cliente:");
 		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblNombre.setBounds(10, 47, 187, 33);
 		contentPane.add(lblNombre);
-		
+
 		txtNombre = new JTextField();
 		txtNombre.setBounds(167, 51, 169, 27);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		txtNombre.setEditable(false);
-		
-		JTextField txtApellido = new JTextField();
+
+		JLabel lblApellido = new JLabel("Apellidos del cliente:");
+		lblApellido.setForeground(Color.WHITE);
+		lblApellido.setFont(new Font("Open Sans", Font.BOLD, 14));
+		lblApellido.setBounds(10, 89, 187, 33);
+		contentPane.add(lblApellido);
+
+		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
 		txtApellido.setBounds(167, 91, 335, 27);
 		txtApellido.setEditable(false);
 		contentPane.add(txtApellido);
-		
-		lblProducto = new JLabel("C\u00F3digo del producto:");
+
+		JLabel lblProducto = new JLabel("Código del producto:");
 		lblProducto.setForeground(Color.WHITE);
 		lblProducto.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblProducto.setBounds(10, 133, 187, 33);
 		contentPane.add(lblProducto);
-		
-		cboCodigo = new JComboBox();
+
+		cboCodigo = new JComboBox<>();
 		cboCodigo.setBounds(167, 133, 335, 27);
 		contentPane.add(cboCodigo);
-		
-		lblCantidad = new JLabel("Cantidad:");
+		cargarProductos();
+
+		JLabel lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setForeground(Color.WHITE);
 		lblCantidad.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblCantidad.setBounds(10, 171, 187, 33);
 		contentPane.add(lblCantidad);
-		
+
 		txtCantidad = new JTextField();
 		txtCantidad.setColumns(10);
 		txtCantidad.setBounds(167, 177, 335, 27);
 		contentPane.add(txtCantidad);
-		
-		btnNewButton = new JButton("Generar boleta");
-		btnNewButton.addActionListener(this);
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(0, 128, 255));
-		btnNewButton.setFont(new Font("Open Sans", Font.BOLD, 14));
-		btnNewButton.setBounds(607, 53, 157, 137);
-		contentPane.add(btnNewButton);
-		
-		scrollPane = new JScrollPane();
+
+		JButton btnBuscarCliente = new JButton("Buscar Cliente");
+		btnBuscarCliente.setForeground(Color.WHITE);
+		btnBuscarCliente.setBackground(new Color(0, 128, 255));
+		btnBuscarCliente.setFont(new Font("Open Sans", Font.BOLD, 14));
+		btnBuscarCliente.setBounds(364, 10, 138, 33);
+		btnBuscarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buscarCliente();
+			}
+		});
+		contentPane.add(btnBuscarCliente);
+
+		btnGenerarBoleta = new JButton("Generar boleta");
+		btnGenerarBoleta.addActionListener(this);
+		btnGenerarBoleta.setForeground(Color.WHITE);
+		btnGenerarBoleta.setBackground(new Color(0, 128, 255));
+		btnGenerarBoleta.setFont(new Font("Open Sans", Font.BOLD, 14));
+		btnGenerarBoleta.setBounds(607, 53, 157, 137);
+		contentPane.add(btnGenerarBoleta);
+
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 215, 774, 345);
 		contentPane.add(scrollPane);
-		
+
 		txtBoleta = new JTextArea();
 		txtBoleta.setEditable(false);
 		scrollPane.setViewportView(txtBoleta);
-		
-		lblVentas = new JLabel("Ventas");
+
+		JLabel lblVentas = new JLabel("Ventas");
 		lblVentas.setForeground(Color.WHITE);
 		lblVentas.setFont(new Font("Open Sans", Font.BOLD, 25));
 		lblVentas.setBounds(364, 1, 134, 35);
 		contentPane.add(lblVentas);
-		
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBackground(new Color(0, 128, 255));
-		btnBuscar.setBounds(364, 47, 138, 33);
-		contentPane.add(btnBuscar);
-		
+
 		MenuPrincipal menuPrincipal = new MenuPrincipal();
-		
+
 		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                menuPrincipal.setVisible(true); 
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				menuPrincipal.setVisible(true);
+			}
+		});
 	}
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton) {
-			actionPerformedBtnNewButton(e);
+
+	private void cargarProductos() {
+		// Cargar los productos en el comboBox
+		for (int i = 0; i < arregloProductos.tamano(); i++) {
+			Producto producto = arregloProductos.obtener(i);
+			cboCodigo.addItem(String.valueOf(producto.getCodigo()));
 		}
 	}
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		
-		JOptionPane.showMessageDialog(this, "Venta realizada con éxito", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+	private void buscarCliente() {
+		try {
+			int codigoCliente = Integer.parseInt(txtCodigoCliente.getText().trim());
+			Cliente cliente = arregloClientes.buscar(codigoCliente);
+
+			if (cliente != null) {
+				txtNombre.setText(cliente.getNombres());
+				txtApellido.setText(cliente.getApellidos());
+			} else {
+				JOptionPane.showMessageDialog(this, "Cliente no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Por favor ingrese un código de cliente válido", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnGenerarBoleta) {
+			realizarVenta();
+		}
+	}
+
+	private void realizarVenta() {
+		try {
+			int codigoCliente = Integer.parseInt(txtCodigoCliente.getText().trim());
+			int codigoProducto = Integer.parseInt(cboCodigo.getSelectedItem().toString().trim());
+			int cantidad = Integer.parseInt(txtCantidad.getText().trim());
+
+			Producto producto = arregloProductos.buscar(codigoProducto);
+			if (producto == null) {
+				JOptionPane.showMessageDialog(this, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			if (cantidad > producto.getStockActual()) {
+				JOptionPane.showMessageDialog(this, "Cantidad solicitada excede el stock disponible", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			double precioUnitario = producto.getPrecio();
+			double subtotal = cantidad * precioUnitario;
+			double igv = subtotal * 0.18;
+			double total = subtotal + igv;
+
+			int codigoVenta = arregloVentas.codigoCorrelativo();
+			Venta nuevaVenta = new Venta(codigoVenta, codigoCliente, codigoProducto, cantidad, precioUnitario,
+					new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+			arregloVentas.adicionar(nuevaVenta);
+
+			producto.setStockActual(producto.getStockActual() - cantidad);
+			arregloProductos.actualizarArchivo();
+
+			String boleta = String.format(
+					"Código del cliente: %d\nNombres y apellidos: %s %s\nCódigo del producto: %d\nNombre del producto: %s\nCantidad: %d\nPrecio unitario: %.2f\nSubtotal: %.2f\nIGV: %.2f\nTotal: %.2f",
+					codigoCliente, txtNombre.getText(), txtApellido.getText(), codigoProducto, producto.getNombre(),
+					cantidad, precioUnitario, subtotal, igv, total);
+
+			txtBoleta.setText(boleta);
+			JOptionPane.showMessageDialog(this, "Venta realizada con éxito", "Confirmación",
+					JOptionPane.INFORMATION_MESSAGE);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, "Error al realizar la venta: " + ex.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
