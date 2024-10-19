@@ -14,13 +14,14 @@
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloClientes"/>
-    <fullyQualifiedTypeName name="clases.Cliente"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="java.lang.Process"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloProductos"/>
     <fullyQualifiedTypeName name="clases.Producto"/>
-    <fullyQualifiedTypeName name="arreglos.ArregloVenta"/>
+    <fullyQualifiedTypeName name="vistas.Reportes"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloProductos"/>
     <fullyQualifiedTypeName name="clases.Venta"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloVenta"/>
+    <fullyQualifiedTypeName name="arreglos.ArregloClientes"/>
+    <fullyQualifiedTypeName name="clases.Cliente"/>
 </qualifiedTypeNameHistroy>

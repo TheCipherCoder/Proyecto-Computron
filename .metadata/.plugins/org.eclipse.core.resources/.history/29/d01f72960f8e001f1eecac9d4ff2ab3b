@@ -1,0 +1,172 @@
+package vistas;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import vistas.Ventas;
+import vistas.Almacen;
+import vistas.Reportes;
+import vistas.MantenimientoCliente;
+import vistas.MantenimientoProducto;
+
+public class MenuPrincipal extends JFrame implements ActionListener {
+
+    private JPanel contentPane;
+    private JMenu mnVentas, mnArchivo, mnAlmacen, mnReportes, mnMantenimiento;
+    private JMenuItem mntmSalir, mntmClientes, mntmProductos, mntmAlmacen, mntmReportes, mntmRegistroVentas;
+    private JLabel lblEncabezado, lblSubtitulo, lblNumeroDeVentas, lblProductosEnStockBajo, lblNuevosClientes;
+    private JPanel pnlVentasDelDia, pnlProductosStockBajo, pnlNuevosClientes;
+    private Reportes reportes = new Reportes();
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                MenuPrincipal frame = new MenuPrincipal();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public MenuPrincipal() {
+        setTitle("Inicio - Computron");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1008, 592);
+        setLocationRelativeTo(null);
+        initUI();
+    }
+
+    private void initUI() {
+        contentPane = new JPanel();
+        contentPane.setBackground(new Color(0, 59, 93));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(null);
+        setContentPane(contentPane);
+
+        initHeader();
+        initPanels();
+        initMenuBar();
+    }
+
+    private void initHeader() {
+        lblEncabezado = new JLabel("Bienvenido al Sistema de Gestión");
+        lblEncabezado.setForeground(Color.WHITE);
+        lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
+        lblEncabezado.setFont(new Font("Open Sans", Font.PLAIN, 27));
+        lblEncabezado.setBounds(242, 33, 508, 50);
+        contentPane.add(lblEncabezado);
+
+        lblSubtitulo = new JLabel("Estadísticas:");
+        lblSubtitulo.setForeground(Color.WHITE);
+        lblSubtitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblSubtitulo.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        lblSubtitulo.setBounds(448, 100, 96, 14);
+        contentPane.add(lblSubtitulo);
+    }
+
+    private void initPanels() {
+        pnlVentasDelDia = createPanel("Ventas del día", 51, 150, "0");
+        pnlProductosStockBajo = createPanel("Productos con Stock bajo", 364, 150, "0");
+        pnlNuevosClientes = createPanel("Nuevos clientes", 677, 150, "0");
+
+        lblNumeroDeVentas = (JLabel) pnlVentasDelDia.getComponent(1);
+        lblProductosEnStockBajo = (JLabel) pnlProductosStockBajo.getComponent(1);
+        lblNuevosClientes = (JLabel) pnlNuevosClientes.getComponent(1);
+
+        lblProductosEnStockBajo.setText(String.valueOf(reportes.contarProductosConStockMinimo()));
+    }
+
+    private JPanel createPanel(String title, int x, int y, String value) {
+        JPanel panel = new JPanel();
+        panel.setBounds(x, y, 262, 157);
+        panel.setLayout(null);
+        contentPane.add(panel);
+
+        JLabel lblTitle = new JLabel(title);
+        lblTitle.setBounds(70, 5, 122, 16);
+        lblTitle.setFont(new Font("Open Sans Light", Font.PLAIN, 11));
+        panel.add(lblTitle);
+
+        JLabel lblValue = new JLabel(value);
+        lblValue.setHorizontalAlignment(SwingConstants.CENTER);
+        lblValue.setForeground(new Color(0, 128, 255));
+        lblValue.setFont(new Font("Open Sans", Font.PLAIN, 30));
+        lblValue.setBounds(41, 33, 180, 90);
+        panel.add(lblValue);
+
+        return panel;
+    }
+
+    private void initMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(new Color(0, 43, 74));
+        setJMenuBar(menuBar);
+
+        mnArchivo = createMenu("Archivo", menuBar);
+        mntmSalir = createMenuItem("Salir", mnArchivo);
+
+        mnMantenimiento = createMenu("Mantenimiento", menuBar);
+        mntmClientes = createMenuItem("Clientes", mnMantenimiento);
+        mntmProductos = createMenuItem("Productos", mnMantenimiento);
+
+        mnVentas = createMenu("Ventas", menuBar);
+        mntmRegistroVentas = createMenuItem("Registro de ventas", mnVentas);
+
+        mnAlmacen = createMenu("Almacén", menuBar);
+        mntmAlmacen = createMenuItem("Ir a Almacén", mnAlmacen);
+
+        mnReportes = createMenu("Reportes", menuBar);
+        mntmReportes = createMenuItem("Ir a Reportes", mnReportes);
+    }
+
+    private JMenu createMenu(String title, JMenuBar menuBar) {
+        JMenu menu = new JMenu(title);
+        menu.setForeground(Color.WHITE);
+        menu.setFont(new Font("Open Sans Light", Font.PLAIN, 15));
+        menuBar.add(menu);
+        return menu;
+    }
+
+    private JMenuItem createMenuItem(String title, JMenu menu) {
+        JMenuItem menuItem = new JMenuItem(title);
+        menuItem.setFont(new Font("Open Sans", Font.PLAIN, 12));
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        return menuItem;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == mntmSalir) {
+            System.exit(0);
+        } else if (e.getSource() == mntmRegistroVentas) {
+            openWindow(new Ventas());
+        } else if (e.getSource() == mntmReportes) {
+            openWindow(new Reportes());
+        } else if (e.getSource() == mntmAlmacen) {
+            openWindow(new Almacen());
+        } else if (e.getSource() == mntmProductos) {
+            openWindow(new MantenimientoProducto());
+        } else if (e.getSource() == mntmClientes) {
+            openWindow(new MantenimientoCliente());
+        }
+    }
+
+    private void openWindow(JFrame frame) {
+        frame.setVisible(true);
+        this.setVisible(false);
+    }
+}
