@@ -404,12 +404,28 @@ public class Almacen extends JFrame implements ActionListener {
 	
 	protected void actionPerformedBtnGuardar(ActionEvent e) {
 		
+			
 		for (int i = 0; i < cuerpoTablaProducto.length; i++) {
 			
-			int stockActual = (Integer) cuerpoTablaProducto[i][4];
+			int codigoProducto = (Integer) cuerpoTablaProducto[i][0];
 			
-			productoB.setStockActual(stockActual);
+			int stockFinal = (Integer) cuerpoTablaProducto[i][4];
+		
+			
+			for (int x = 0; x < productos.tamano(); x++) {
+				
+				
+				if (codigoProducto == productos.obtener(x).getCodigo()) {
+					
+					
+					
+					productos.obtener(x).setStockActual(stockFinal);
+				}
+			
+			}
+
 		}
+		
 		
 
 		productos.actualizarArchivo();
