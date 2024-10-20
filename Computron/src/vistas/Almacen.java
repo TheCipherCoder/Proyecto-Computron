@@ -473,15 +473,23 @@ public class Almacen extends JFrame implements ActionListener {
 			
 			ListaCbo[0] = "";
 			
-			for (int i = 0; i < cuerpoTablaProducto.length; i++) {
+			int indiceLista = 1;
+			
+			for (int i = 0; i < productos.tamano(); i++) {
 				
 				Producto producto = productos.obtener(i);
 				
 				for (int x = 0; x < cuerpoTablaProducto.length; x++) { 
 					
-					if (producto.getCodigo() == (Integer)cuerpoTablaProducto[x][0]) {
+					if (producto.getCodigo() == (Integer)cuerpoTablaProducto[x][0] ) {
+					
 						
-						ListaCbo[i+ 1] = String.valueOf(producto.getCodigo());}}}
+						ListaCbo[indiceLista] = String.valueOf(producto.getCodigo());
+						
+						indiceLista++;
+					}}};
+						
+						
 			break;
 	
 		}
