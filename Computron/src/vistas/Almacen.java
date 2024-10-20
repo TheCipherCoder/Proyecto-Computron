@@ -47,20 +47,25 @@ public class Almacen extends JFrame implements ActionListener {
 	private JScrollPane scrollPane;
 	private JLabel lblAlmacen;
 	private JTable tblProductos;
+	private JScrollPane scrollPane_1;
+	private JTable tblPreVisualizacion;
+	private JButton btnGuardar;
+	private JLabel lblTablaPrev;
+	private JLabel lblPrevisualizacionDeLa;
+	private JButton btnEditar;
 
 	// variables globales
 
 	private Producto productoB;
-	private int contadorFilas = 1;
+	
 	ArregloProductos productos = new ArregloProductos();
 	String ListaCbo[];
 	String encabezadoTablaProducto[];
 	String encabezadoTablaPrev[];
 	Object cuerpoTablaProducto[][];
 	Object cuerpoTablaPrev[][];
-	private JScrollPane scrollPane_1;
-	private JTable tblPreVisualizacion;
-	private JButton btnGuardar;
+	private int contadorFilas = 1;
+	private int estado = 0;
 
 	/**
 	 * Launch the application.
@@ -92,10 +97,31 @@ public class Almacen extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 59, 93));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+
+		cboCodigo = new JComboBox();
+		
+		
+		cboCodigo.addActionListener(this);
+		
+		desglosarLista(estado);
+		
+		
+		
+		cboCodigo.setBounds(167, 74, 446, 27);
+		
+		contentPane.add(cboCodigo);
+
+	
+
+		txtCantidad = new JTextField();
+		txtCantidad.setColumns(10);
+		txtCantidad.setBounds(167, 118, 446, 27);
+		contentPane.add(txtCantidad);
+
+		
 		lblCodigo = new JLabel("C\u00F3digo del producto:");
 		lblCodigo.setForeground(Color.WHITE);
 		lblCodigo.setFont(new Font("Open Sans", Font.BOLD, 14));
@@ -103,26 +129,33 @@ public class Almacen extends JFrame implements ActionListener {
 		contentPane.add(lblCodigo);
 
 		
-
-		cboCodigo = new JComboBox();
-		cboCodigo.addActionListener(this);
-		ListaCbo = desglosarLista();
-		cboCodigo.setModel(new DefaultComboBoxModel(ListaCbo));
-		cboCodigo.setBounds(167, 74, 446, 27);
-		contentPane.add(cboCodigo);
-
 		lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setForeground(Color.WHITE);
 		lblCantidad.setFont(new Font("Open Sans", Font.BOLD, 14));
 		lblCantidad.setBounds(10, 114, 187, 33);
 		contentPane.add(lblCantidad);
-
-		txtCantidad = new JTextField();
-		txtCantidad.setColumns(10);
-		txtCantidad.setBounds(167, 118, 446, 27);
-		contentPane.add(txtCantidad);
-
-		btnIngresar = new JButton("Ingresar");
+	
+		lblAlmacen = new JLabel("Sistema de almac\u00E9n");
+		lblAlmacen.setForeground(Color.WHITE);
+		lblAlmacen.setFont(new Font("Open Sans", Font.BOLD, 25));
+		lblAlmacen.setBounds(265, 11, 284, 35);
+		contentPane.add(lblAlmacen);
+		
+		lblTablaPrev = new JLabel("PREVISUALIZACION DEL PRODUCTO SELECCIONADO");
+		lblTablaPrev.setBounds(10, 169, 600, 14);
+		lblTablaPrev.setForeground(Color.WHITE);
+		lblTablaPrev.setFont(new Font("Open Sans", Font.BOLD, 14));
+		contentPane.add(lblTablaPrev);
+		
+		lblPrevisualizacionDeLa = new JLabel("PREVISUALIZACION DE LA MODIFICACIÓN DE STOCK DE LOS PRODUCTOS SELECCIONADOS");
+		lblPrevisualizacionDeLa.setBounds(10, 250, 800, 14);
+		lblPrevisualizacionDeLa.setForeground(Color.WHITE);
+		lblPrevisualizacionDeLa.setFont(new Font("Open Sans", Font.BOLD, 14));
+		contentPane.add(lblPrevisualizacionDeLa);
+		
+		//CREACION DE BOTONES
+		
+		btnIngresar = new JButton("INGRESAR");
 		btnIngresar.setEnabled(false);
 		btnIngresar.addActionListener(this);
 		btnIngresar.setForeground(new Color(255, 255, 255));
@@ -130,15 +163,33 @@ public class Almacen extends JFrame implements ActionListener {
 		btnIngresar.setFont(new Font("Open Sans", Font.BOLD, 14));
 		btnIngresar.setBounds(645, 66, 126, 41);
 		contentPane.add(btnIngresar);
+		
+		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(this);
+		btnGuardar.setEnabled(false);
+		btnGuardar.setForeground(new Color(255, 255, 255));
+		btnGuardar.setBackground(new Color(0, 128, 255));
+		btnGuardar.setFont(new Font("Open Sans", Font.BOLD, 14));
+		btnGuardar.setBounds(645, 120, 126, 41);
+		contentPane.add(btnGuardar);
+		
+		btnEditar = new JButton("EDITAR");
+		btnEditar.addActionListener(this);
+		btnEditar.setBounds(645, 190, 126, 41);
+		btnEditar.setEnabled(false);
+		btnEditar.setForeground(new Color(255, 255, 255));
+		btnEditar.setBackground(new Color(0, 128, 255));
+		btnEditar.setFont(new Font("Open Sans", Font.BOLD, 14));
+		contentPane.add(btnEditar);
 
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setViewportBorder(null);
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(10, 194, 774, 41);
-		contentPane.add(scrollPane_1);
-
+		
+		
+		
+		
+		
 		// CREACION DE TABLAS
+		
+	
 
 		// CREACION DE LAS COLUMNAS Y FILAS DE LA PRIMERA TABLA
 
@@ -146,18 +197,32 @@ public class Almacen extends JFrame implements ActionListener {
 		encabezadoTablaPrev = new String[] { "C\u00F3digo", "Nombre", "Stock actual", "Stock m\u00E1ximo" };
 
 		// TABLA DE PREVISUALIZACION
+		
+		//CREACION DEL SCROLL BAR
+
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportBorder(null);
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(10, 194, 610, 41);
+		contentPane.add(scrollPane_1);
+		
+		//FIN DEL SCROLL
+		
+		//CREACION DE LA TABLA
 
 		tblPreVisualizacion = new JTable();
 		tblPreVisualizacion.setFont(new Font("Dialog", Font.BOLD, 14));
 		tblPreVisualizacion.setBackground(new Color(255, 255, 255));
 		tblPreVisualizacion.setEnabled(false);
+		
+		//ASIGNACION DE VALORES A LA TABLA
+		
 		tblPreVisualizacion.setModel(new DefaultTableModel(cuerpoTablaPrev, encabezadoTablaPrev));
-
+		
 		scrollPane_1.setViewportView(tblPreVisualizacion);
 
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 269, 774, 291);
-		contentPane.add(scrollPane);
+	
 
 		// FIN DE LA TABLA DE LA PREVISUALIZACION
 		
@@ -169,12 +234,25 @@ public class Almacen extends JFrame implements ActionListener {
 		cuerpoTablaProducto = new Object[][] { { "", null, null, null, null, null } };
 		encabezadoTablaProducto = new String[] { "C\u00F3digo", "Nombre", "Stock Anterior", "Cantidad Ingresada", "Stock Final", "Stock m\u00E1ximo" };
 
+		
+		//CREACION DEL SCROLL BAR
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 269, 774, 291);
+		contentPane.add(scrollPane);
+		
+		//FIN DEL SCROLL
+		
+		//CREACION DE LA TABLA
+		
 		tblProductos = new JTable();
 		tblProductos.setEnabled(false);
 		tblProductos.setBackground(new Color(255, 255, 255));
 		tblProductos.setFont(new Font("Open Sans", Font.BOLD, 14));
-
+		
+		//ASIGNACION DE VALORES A LA TABLA
+		
 		tblProductos.setModel(new DefaultTableModel(cuerpoTablaProducto, encabezadoTablaProducto));
+		
 		tblProductos.getColumnModel().getColumn(0).setPreferredWidth(100);
 		tblProductos.getColumnModel().getColumn(0).setMinWidth(100);
 		tblProductos.getColumnModel().getColumn(0).setMaxWidth(100);
@@ -191,20 +269,6 @@ public class Almacen extends JFrame implements ActionListener {
 		
 		//FIN DE LAS TABLAS
 		
-		lblAlmacen = new JLabel("Sistema de almac\u00E9n");
-		lblAlmacen.setForeground(Color.WHITE);
-		lblAlmacen.setFont(new Font("Open Sans", Font.BOLD, 25));
-		lblAlmacen.setBounds(265, 11, 284, 35);
-		contentPane.add(lblAlmacen);
-		
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(this);
-		btnGuardar.setEnabled(false);
-		btnGuardar.setForeground(new Color(255, 255, 255));
-		btnGuardar.setBackground(new Color(0, 128, 255));
-		btnGuardar.setFont(new Font("Open Sans", Font.BOLD, 14));
-		btnGuardar.setBounds(645, 120, 126, 41);
-		contentPane.add(btnGuardar);
 		
 		MenuPrincipal menuprincipal = new MenuPrincipal();
 
@@ -219,6 +283,9 @@ public class Almacen extends JFrame implements ActionListener {
 	//EVENTOS DE INTERRACCION
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEditar) {
+			actionPerformedBtnEditar(e);
+		}
 		if (e.getSource() == btnGuardar) {
 			actionPerformedBtnGuardar(e);
 		}
@@ -233,13 +300,18 @@ public class Almacen extends JFrame implements ActionListener {
 	//BOTON AGREGAR
 	
 	protected void actionPerformedBtnAgregar(ActionEvent e) {
+		
+		
 
 		try {
 
+			//EVITAR QUE SUPERE EL STOCK MAXIMO
 			
-			int stockActualPro = productoB.getStockActual();
+				
+			
+			int stockActualPro = productoB.getStockActual(); //ALMACENAR STOCK ACTUAL
 
-			if (stockActualPro + cantidadIngresar() > productoB.getStockMaximo()) {
+			if (stockActualPro + cantidadIngresar() > productoB.getStockMaximo()) { 
 
 				limpiar(1);
 
@@ -256,19 +328,52 @@ public class Almacen extends JFrame implements ActionListener {
 
 			} else {
 				
+				switch(btnIngresar.getText()) {
 				
+				case "INGRESAR" :
+					
+					buscarProductoxCodigo();
+					agregarDatosTablaProducto(productoB);
+					crearTablaPro();
+					limpiar(0);
+					
+					btnGuardar.setEnabled(true);
+					
+					reiniciarTablaPrev();
+					
+					btnEditar.setEnabled(true);
+					
+					
+					break;
+					
+				case "ACTUALIZAR":
+					
+					buscarProductoxCodigo();
+					actualizarTablaProductos();
+					crearTablaPro();
+					limpiar(0);
+					btnGuardar.setEnabled(true);
+					
+					reiniciarTablaPrev();
+					
+					btnEditar.setEnabled(true);
+					
+					btnIngresar.setText("INGRESAR");
+					
+					lblTablaPrev.setText("PREVISUALIZACION DEL PRODUCTO SELECCIONADO");
+					
+					estado = 0;
+					
+					desglosarLista(estado);
+					
+					reiniciarTablaPrev();
+					
+					break;
+					
+				}
+					
+			} 
 				
-				buscarProductoxCodigo();
-				agregarDatosTablaProducto(productoB);
-				crearTablaPro();
-				limpiar(0);
-				
-				btnGuardar.setEnabled(true);
-				
-				reiniciarTablaPrev();
-
-			}
-
 		}
 
 		catch (NumberFormatException es) {
@@ -282,12 +387,14 @@ public class Almacen extends JFrame implements ActionListener {
 	// Accion a realizar cuando se interactua con el comboBox
 
 	protected void actionPerformedCboCodigo(ActionEvent e) {
-
+		
+	
+		
 		eliminarPrimerItemLista(ListaCbo);
-
+		
 		buscarProductoxCodigo();
 
-		agregarDatosTablaPrev(productoB);
+		agregarDatosTablaPrev(estado);
 
 		crearTablaPrev();
 		
@@ -320,37 +427,62 @@ public class Almacen extends JFrame implements ActionListener {
 	// FUNCIONES COMPLEMENTARIAS
 	
 	// Crear la lista para ser mostrada en el Combo box
-
-	protected String[] desglosarLista() {
-
-		// Se agrega un adicional para que el vacio aparezca primero
-
-		String listaDesglosada[] = new String[productos.tamano() + 1];
-
-		listaDesglosada[0] = "";
-
-		for (int i = 0; i < (productos.tamano()); i++) {
-
-			Producto producto = productos.obtener(i);
-
-			listaDesglosada[i + 1] = String.valueOf(producto.getCodigo());
-
-		}
-
-		return listaDesglosada;
-
-	}
 	
+	// 0 = INGRESAR STOCK --- 1 = EDITAR STOCK INGRESADO PREVIAMENTE INGRESADO
 
+	protected void desglosarLista(int estado) {
+	
+	
+		switch (estado) {
+		
+		case 0:
+		
+			// Se agrega un adicional para que el vacio aparezca primero
+			
+			ListaCbo = new String[productos.tamano() + 1];
+
+			ListaCbo[0] = "";
+			
+			for (int i = 0; i < (productos.tamano()); i++) {
+
+				Producto producto = productos.obtener(i);
+
+				ListaCbo[i + 1] = String.valueOf(producto.getCodigo()); }
+				
+				break;
+				
+		case 1:
+			
+			ListaCbo = new String[cuerpoTablaProducto.length + 1];
+			
+			ListaCbo[0] = "";
+			
+			for (int i = 0; i < cuerpoTablaProducto.length; i++) {
+				
+				Producto producto = productos.obtener(i);
+				
+				for (int x = 0; x < cuerpoTablaProducto.length; x++) { 
+					
+					if (producto.getCodigo() == (Integer)cuerpoTablaProducto[x][0]) {
+						
+						ListaCbo[i+ 1] = String.valueOf(producto.getCodigo());}}}
+			break;
+	
+		}
+		
+		cboCodigo.setModel(new DefaultComboBoxModel(ListaCbo));
+	}
 	
 
 	protected void eliminarPrimerItemLista(String[] x) {
 
 		// Eliminar el vacio del combo box
 
-		int indiceProductoSeleccionado = cboCodigo.getSelectedIndex();
+		
 
 		if (x[0] == "") {
+			
+			int indiceProductoSeleccionado = cboCodigo.getSelectedIndex();
 
 			String nuevaLista[] = new String[(x.length - 1)];
 
@@ -395,6 +527,8 @@ public class Almacen extends JFrame implements ActionListener {
 	private void crearTablaPrev() {
 
 		tblPreVisualizacion.setModel(new DefaultTableModel(cuerpoTablaPrev, encabezadoTablaPrev));
+		
+		
 
 		estilizarTabla(2);
 	}
@@ -403,6 +537,8 @@ public class Almacen extends JFrame implements ActionListener {
 		
 		cuerpoTablaPrev = new Object[][] { { "", null, null, null} };
 
+		encabezadoTablaPrev = new String[] { "C\u00F3digo", "Nombre", "Stock actual", "Stock m\u00E1ximo" };
+		
 		tblPreVisualizacion.setModel(new DefaultTableModel(cuerpoTablaPrev, encabezadoTablaPrev));
 
 		estilizarTabla(2);
@@ -429,7 +565,7 @@ public class Almacen extends JFrame implements ActionListener {
 					
 					Integer StockFinalPosterior = ((Integer)StockFinalPrevio) + cantidadIngresada;
 					
-					if (StockFinalPosterior + cantidadIngresada > productoB.getStockMaximo()) {
+					if (StockFinalPosterior > productoB.getStockMaximo()) {
 
 						limpiar(1);
 
@@ -469,17 +605,89 @@ public class Almacen extends JFrame implements ActionListener {
 		
 		
 			}
+	
+	
+	
+	private void actualizarTablaProductos() {
+		
+		Object codigoObject = productoB.getCodigo();
+		
+		for (int i = 0; i < cuerpoTablaProducto.length; i++) {
+			
+			if (cuerpoTablaProducto[i][0].equals(codigoObject)) {
+				
+				int cantidadIngresada = cantidadIngresar();
+					
+				Object StockInicial = cuerpoTablaProducto[i][2];
+				
+				Integer StockFinal = ((Integer)StockInicial) + cantidadIngresada;
+				
+				if (StockFinal > productoB.getStockMaximo()) {
+
+					limpiar(1);
+
+					JOptionPane.showMessageDialog(null,
+							"Con la cantidad que intenta ingresar, se supera el stock máximo permitido, verificar",
+							"ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+					
+					return;
+
+				} else {
+					
+					cuerpoTablaProducto[i][3] = cantidadIngresada;
+					cuerpoTablaProducto[i][4] = StockFinal;
+					
+					return;
+					
+				}
+				
+			}
+			
+		}
+		
+		
+	}
 		
 	
-	private void agregarDatosTablaPrev(Producto p) {
+	private void agregarDatosTablaPrev(int estado) {
+		
+		if (estado == 0) { //MODO INGRESAR
+			
+			cuerpoTablaPrev[0][0] = productoB.getCodigo();
+			cuerpoTablaPrev[0][1] = productoB.getNombre();
+			cuerpoTablaPrev[0][2] = productoB.getStockActual();
+			cuerpoTablaPrev[0][3] = productoB.getStockMaximo();
+			
+			
+		} else if (estado == 1) { //MODO ACTUALIZAR-EDITAR
+			
+			
+			
+			Object codigoObject = productoB.getCodigo();
+			
+			Object cantidadIngresadaInicial = 0;
+			
+			for (int i = 0; i < cuerpoTablaProducto.length; i++) {
+				
+				if (cuerpoTablaProducto[i][0].equals(codigoObject)) {
+				
+					cantidadIngresadaInicial = cuerpoTablaProducto[i][3];
+					
+				} }
+			
+		
+			cuerpoTablaPrev[0][0] = productoB.getCodigo();
+			cuerpoTablaPrev[0][1] = productoB.getNombre();
+			cuerpoTablaPrev[0][2] = cantidadIngresadaInicial; 
+			
+		}
 
-		cuerpoTablaPrev[0][0] = p.getCodigo();
-		cuerpoTablaPrev[0][1] = p.getNombre();
-		cuerpoTablaPrev[0][2] = p.getStockActual();
-		cuerpoTablaPrev[0][3] = p.getStockMaximo();
+		
 
 
 	}
+	
+	
 
 	
 
@@ -581,6 +789,28 @@ public class Almacen extends JFrame implements ActionListener {
 		
 		
 	}
-	
+	protected void actionPerformedBtnEditar(ActionEvent e) {
+		
+		estado = 1;
+		
+		desglosarLista(estado);
+		
+		encabezadoTablaPrev = new String[] { "C\u00F3digo", "Nombre", "Cantidad Ingresada"};
+		cuerpoTablaPrev = new Object[][] {{null,null,null}};
+		
+		crearTablaPrev();
+		
+		btnIngresar.setText("ACTUALIZAR");
+		
+		lblTablaPrev.setText("PREVISUALIZACION DEL STOCK FINAL DEL PRODUCTO A MODIFICAR");
+		
+		btnEditar.setEnabled(false);
+		
+		btnGuardar.setEnabled(false);
+		
+		
+		
+		
+	}
 }
 	
