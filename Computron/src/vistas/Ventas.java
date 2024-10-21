@@ -159,9 +159,11 @@ public class Ventas extends JFrame implements ActionListener {
 		lblVentas.setBounds(364, 1, 134, 35);
 		contentPane.add(lblVentas);
 
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		
 
 		addWindowListener(new WindowAdapter() {
+
+			MenuPrincipal menuPrincipal = new MenuPrincipal();
 			@Override
 			public void windowClosing(WindowEvent e) {
 				menuPrincipal.setVisible(true);
