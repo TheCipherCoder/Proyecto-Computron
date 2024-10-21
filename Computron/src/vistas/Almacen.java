@@ -273,9 +273,10 @@ public class Almacen extends JFrame implements ActionListener {
 		
 
 		addWindowListener(new WindowAdapter() {
-			MenuPrincipal menuprincipal = new MenuPrincipal();
+			
 			@Override
 			public void windowClosing(WindowEvent e) {
+				MenuPrincipal menuprincipal = new MenuPrincipal();
 				menuprincipal.setVisible(true);
 			}
 		});
