@@ -252,10 +252,11 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		habilitarBotones(true);
 		listar();
 		
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+		MenuPrincipal menuPrincipal = new MenuPrincipal()
                 menuPrincipal.setVisible(true); 
             }
         });
