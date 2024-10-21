@@ -252,10 +252,11 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 		habilitarBotones(true);
 		listar();
 		
-		MenuPrincipal menuPrincipal = new MenuPrincipal();
+		
 		addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+		MenuPrincipal menuPrincipal = new MenuPrincipal()
                 menuPrincipal.setVisible(true); 
             }
         });
@@ -366,43 +367,56 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 	}
 	
 	void adicionarCliente() {
-	    int codigo = leerCodigo();  
-	    String nombres = leerNombre();  
-	    String apellidos = leerApellido();
-	    
-	    if(nombres.length()>0) {
-	    	String dni = leerDni();
-	    	if(dni.length()>0) {
-	    		if(ac.buscar(dni)==null) {
-	    			try {
-						String telefono = leerTelefono();
-						try {
-							String direccion = leerDireccion();
-							Cliente nuevo = new Cliente(codigo ,nombres, apellidos, direccion, telefono, dni);
-							ac.adicionar(nuevo);
-							listar();
-							txtCodigo.setText(""+ac.codigoCorrelativo());
-							txtNombre.setText("");
-							txtApellido.setText("");
-							txtDireccion.setText("");
-							txtTelefono.setText("");
-							txtDni.setText("");
-						} catch (Exception e) {
-							error("Ingrese DIRECCION valida, porfavor", txtDireccion);
-						}
-					} catch (Exception e) {
-						error("Ingrese TELEFONO correcto, porfavor", txtTelefono);
-					}
-	    		}else {
-	    			error("El DNI" + dni + "ya existe", txtDni);
-	    		}
-	    	}else {
-	    		error("Ingrese DNI correcto, porfavor", txtDni);
-	    	}
-	    }else {
-	    	error("Ingrese NOMBRE correcto, porfavor", txtNombre);
+	    int codigo = leerCodigo();
+	    String nombres = leerNombre();
+
+	    if (nombres.length() > 0) {
+	        String apellidos = leerApellido();
+	        if (apellidos.length() > 0) {
+	            try {
+	                String direccion = leerDireccion();
+	                if (direccion.length() > 0) {
+	                    try {
+	                        String telefono = leerTelefono();
+	                        if (telefono.length() > 0) {
+	                            String dni = leerDni();
+	                            if (dni.length() > 0) {
+	                                if (ac.buscar(dni) == null) {
+	                                    Cliente nuevo = new Cliente(codigo, nombres, apellidos, direccion, telefono, dni);
+	                                    ac.adicionar(nuevo);
+	                                    listar();
+	                                    txtCodigo.setText("" + ac.codigoCorrelativo());
+	                                    txtNombre.setText("");
+	                                    txtApellido.setText("");
+	                                    txtDireccion.setText("");
+	                                    txtTelefono.setText("");
+	                                    txtDni.setText("");
+	                                } else {
+	                                    error("El DNI " + dni + " ya existe", txtDni);
+	                                }
+	                            } else {
+	                                error("Ingrese DNI correcto, por favor", txtDni);
+	                            }
+	                        } else {
+	                            error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                        }
+	                    } catch (Exception e) {
+	                        error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                    }
+	                } else {
+	                    error("Ingrese DIRECCION válida, por favor", txtDireccion);
+	                }
+	            } catch (Exception e) {
+	                error("Ingrese DIRECCION válida, por favor", txtDireccion);
+	            }
+	        } else {
+	            error("Ingrese APELLIDO correcto, por favor", txtApellido);
+	        }
+	    } else {
+	        error("Ingrese NOMBRE correcto, por favor", txtNombre);
 	    }
 	}
+
 
 	
 	void consultarPersona() {
@@ -410,11 +424,12 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 			int codigo = leerCodigo();
 			Cliente x = ac.buscar(codigo);
 			if (x != null) {
-				txtNombre.setText(x.getNombre());
+				txtNombre.setText(x.getNombres());
 				txtDni.setText(x.getDni());
-				txtPeso.setText("" + x.getPeso());
-				txtEstatura.setText("" + x.getEstatura());
-				cboEstadoCivil.setSelectedIndex(x.getEstado());
+				txtApellido.setText(x.getApellidos());
+				txtDireccion.setText(x.getDireccion());
+				txtTelefono.setText(x.getTelefono());
+				
 				if (tipoOperacion == MODIFICAR) {
 					habilitarEntradas(true);
 					txtCodigo.setEditable(false);
@@ -435,12 +450,81 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 			error("Ingrese CÓDIGO correcto", txtCodigo);
 		}
 	}
-	void modificarPersona() {
 	
-	}
-	void eliminarPersona() {
+	void modificarPersona() {
+	    try {
+	        int codigo = leerCodigo();
+	        Cliente x = ac.buscar(codigo);
 
+	        if (x != null) {
+	            String nombre = leerNombre();
+	            if (nombre.length() > 0) {
+	                String apellido = leerApellido();
+	                if (apellido.length() > 0) {
+	                    String direccion = leerDireccion();
+	                    if (direccion.length() > 0) {
+	                        String telefono = leerTelefono();
+	                        if (telefono.length() > 0) {
+	                            String dni = leerDni();
+	                            if (dni.length() > 0) {
+	                                try {
+	                                    x.setNombres(nombre);
+	                                    x.setApellidos(apellido);
+	                                    x.setDireccion(direccion);
+	                                    x.setTelefono(telefono);
+	                                    x.setDni(dni);
+	                                    ac.actualizarArchivo();
+	                                    listar();
+	                                    txtNombre.requestFocus();
+	                                } catch (Exception e) {
+	                                    
+	                                }
+	                            } else {
+	                                error("Ingrese DNI correcto, por favor", txtDni);
+	                            }
+	                        } else {
+	                            error("Ingrese TELEFONO correcto, por favor", txtTelefono);
+	                        }
+	                    } else {
+	                        error("Ingrese DIRECCION correcta, por favor", txtDireccion);
+	                    }
+	                } else {
+	                    error("Ingrese APELLIDO correcto, por favor", txtApellido);
+	                }
+	            } else {
+	                error("Ingrese NOMBRE correcto, por favor", txtNombre);
+	            }
+	        } else {
+	            error("El código " + codigo + " no existe", txtCodigo);
+	        }
+
+	    } catch (Exception e) {
+	        error("Ingrese CODIGO correcto, por favor", txtCodigo);
+	    }
 	}
+
+	
+	
+	void eliminarPersona() {
+		try {
+			int codigo = leerCodigo();
+			Cliente x = ac.buscar(codigo);
+			if (x != null) {
+				int ok = confirmar("¿ Desea eliminar el registro ?");
+				if (ok == 0) {
+					ac.eliminar(x);
+					listar();
+					btnOK.setEnabled(false);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtCodigo);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtCodigo);
+		}
+	}
+	
 	//  Métodos tipo void (con parámetros)
 	void habilitarEntradas(boolean sino) {
 		
@@ -498,5 +582,9 @@ public class MantenimientoCliente extends JDialog implements ActionListener {
 
 	String leerTelefono() {
 		return txtTelefono.getText().trim();
+	}
+	
+	int confirmar(String s) {
+		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 }
