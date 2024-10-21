@@ -270,9 +270,10 @@ public class Almacen extends JFrame implements ActionListener {
 		//FIN DE LAS TABLAS
 		
 		
-		MenuPrincipal menuprincipal = new MenuPrincipal();
+		
 
 		addWindowListener(new WindowAdapter() {
+			MenuPrincipal menuprincipal = new MenuPrincipal();
 			@Override
 			public void windowClosing(WindowEvent e) {
 				menuprincipal.setVisible(true);
