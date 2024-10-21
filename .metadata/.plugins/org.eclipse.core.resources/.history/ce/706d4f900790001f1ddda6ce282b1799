@@ -112,7 +112,7 @@ public class Reportes extends JFrame implements ActionListener {
 
         switch (option) {
             case "Listado General de Ventas":
-                JOptionPane.showMessageDialog(this, "Generando Listado general de ventas...Presione OK para continuar");
+                JOptionPane.showMessageDialog(this, "Generando Listado general de ventas...");
                 StringBuilder listadoVentas = new StringBuilder();
                 listadoVentas.append("Listado General de Ventas:\n");
                 boolean hayVentas = false;
@@ -135,7 +135,7 @@ public class Reportes extends JFrame implements ActionListener {
                 break;
 
             case "Listado de Productos por Stock Mínimo":
-                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Stock Mínimo...Presione OK para continuar");
+                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Stock Mínimo...");
                 int stockMinimo = 0;
                 StringBuilder productosConStockMinimo = new StringBuilder();
                 productosConStockMinimo.append("Productos con stock mínimo:\n");
@@ -160,7 +160,7 @@ public class Reportes extends JFrame implements ActionListener {
                 break;
 
             case "Listado de Productos por Unidades Vendidas":
-                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Unidades Vendidas...Presione OK para continuar");
+                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Unidades Vendidas...");
                 StringBuilder unidadesVendidas = new StringBuilder();
                 unidadesVendidas.append("Listado de Productos por Unidades Vendidas:\n");
                 boolean hayProductosVendidos = false;
@@ -185,7 +185,7 @@ public class Reportes extends JFrame implements ActionListener {
                 break;
 
             case "Listado de Productos por Importe Total Acumulado":
-                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Importe Total Acumulado...Presione OK para continuar");
+                JOptionPane.showMessageDialog(this, "Generando Listado de Productos por Importe Total Acumulado...");
                 StringBuilder importeTotalAcumulado = new StringBuilder();
                 importeTotalAcumulado.append("Listado de Productos por Importe Total Acumulado:\n");
                 boolean hayProductosAcumulados = false;
