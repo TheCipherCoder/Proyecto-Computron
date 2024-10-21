@@ -163,9 +163,10 @@ public class Ventas extends JFrame implements ActionListener {
 
 		addWindowListener(new WindowAdapter() {
 
-			MenuPrincipal menuPrincipal = new MenuPrincipal();
+			
 			@Override
 			public void windowClosing(WindowEvent e) {
+				MenuPrincipal menuPrincipal = new MenuPrincipal();
 				menuPrincipal.setVisible(true);
 			}
 		});
