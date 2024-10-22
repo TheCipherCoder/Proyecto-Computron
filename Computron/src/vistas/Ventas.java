@@ -236,9 +236,28 @@ public class Ventas extends JFrame implements ActionListener {
 			arregloProductos.actualizarArchivo();
 
 			String boleta = String.format(
-					"Código del cliente: %d\nNombres y apellidos: %s %s\nCódigo del producto: %d\nNombre del producto: %s\nCantidad: %d\nPrecio unitario: %.2f\nSubtotal: %.2f\nIGV: %.2f\nTotal: %.2f",
-					codigoCliente, txtNombre.getText(), txtApellido.getText(), codigoProducto, producto.getNombre(),
-					cantidad, precioUnitario, subtotal, igv, total);
+			        "	==================== BOLETA DE VENTA ====================\n" +
+			        "	Fecha de emisión: %s\n" +
+			        "	----------------------------------------------------------\n" +
+			        "	Cliente:\n" +
+			        "   	Código del cliente: %d\n" +
+			        "   	Nombres y apellidos: %s %s\n" +
+			        "	----------------------------------------------------------\n" +
+			        "	Producto:\n" +
+			        "   	Código del producto: %d\n" +
+			        "   	Nombre del producto: %s\n" +
+			        "   	Cantidad: %d\n" +
+			        "   	Precio unitario: S/ %.2f\n" +
+			        "	----------------------------------------------------------\n" +
+			        "	Resumen de la compra:\n" +
+			        "   	Subtotal: S/ %.2f\n" +
+			        "   	IGV (18%%): S/ %.2f\n" +
+			        "   	Total a pagar: S/ %.2f\n" +
+			        "	==========================================================\n",
+			        new SimpleDateFormat("dd/MM/yyyy").format(new Date()),
+			        codigoCliente, txtNombre.getText(), txtApellido.getText(),
+			        codigoProducto, producto.getNombre(), cantidad, precioUnitario,
+			        subtotal, igv, total);
 
 			txtBoleta.setText(boleta);
 			JOptionPane.showMessageDialog(this, "Venta realizada con éxito", "Confirmación",
