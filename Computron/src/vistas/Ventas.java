@@ -150,6 +150,7 @@ public class Ventas extends JFrame implements ActionListener {
 		contentPane.add(scrollPane);
 
 		txtBoleta = new JTextArea();
+		txtBoleta.setFont(new Font("Monospaced", Font.BOLD, 16));
 		txtBoleta.setEditable(false);
 		scrollPane.setViewportView(txtBoleta);
 
